@@ -1,0 +1,69 @@
+import { useState } from 'react'
+import './App.css'
+import {BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import Collection from './pages/Collection'
+import Aboutus from './pages/Aboutus'
+import Orders from './pages/Orders'
+import PlaceOrder from './pages/PlaceOrder'
+import Login from './pages/Login'
+import Cart from './pages/Cart'
+import Product from './pages/Product'
+import Contactus from './pages/Contactus'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import {ToastContainer} from "react-toastify"
+import ScrollToTop from './utils/ScrollToTop'
+import 'react-toastify/dist/ReactToastify.css';
+import OrderDetails from './pages/OrderDetails'
+import SignIn from './pages/SignUp'
+import ForgotPassword from './pages/ForgotPassword'
+import EmailVerified from './pages/EmailVerified'
+import ResetPassword from './pages/ResetPassword'
+import SignUp from './pages/SignUp'
+import ResetPasswordMessage from './pages/ResetPasswordMessage'
+import Profile from './pages/Profile'
+import Wishlist from './pages/Wishlist'
+import { LoadingProvider } from './context/LoadingContext'
+
+function App() {
+  const [searchVisible, setSearchVisible] = useState(false);
+
+  return (
+    <LoadingProvider>
+      <div className='min-h-screen flex flex-col'>
+        <ToastContainer/>
+        <Navbar searchVisible={searchVisible} setSearchVisible={setSearchVisible} />
+        <ScrollToTop/>
+        
+        {/* Main content area */}
+        <main className='flex-1'>
+          <Routes>
+            <Route path="/" element={<Home searchVisible={searchVisible} />} />
+            <Route path="/collection" element={<Collection />} />
+            <Route path="/about" element={<Aboutus />} />
+            <Route path="/contact" element={<Contactus />} />
+            <Route path="/product/:productId" element={<Product />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/email-verified" element={<EmailVerified />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/reset-password-sent" element={<ResetPasswordMessage />} />
+            <Route path="/verify-email" element={<EmailVerified />} />
+            <Route path="/wishlist" element={<Wishlist/>} />  
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/place-order" element={<PlaceOrder />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/orders/:orderId" element={<OrderDetails />} />
+          </Routes>
+        </main>
+        
+        <Footer/>
+      </div>
+    </LoadingProvider>
+  )
+}
+
+export default App
