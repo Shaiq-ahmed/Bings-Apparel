@@ -1,4 +1,4 @@
-# 🛍️ StreetWear Fashion Store
+# 🛍️ Bings-Apparel Fashion Store
 
 A modern, premium e-commerce platform built with React and Vite, featuring stunning animations, parallax effects, and a professional user experience inspired by top-tier fashion brands like Nike and Adidas.
 
@@ -301,4 +301,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built with ❤️ using React, Vite, and modern web technologies**
 
-For support, email: support@streetwear-store.com
+For support, email: support@bingsapparel-store.com
