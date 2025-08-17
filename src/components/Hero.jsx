@@ -51,8 +51,6 @@ const Hero = () => {
     Autoplay({ delay: 7000, stopOnInteraction: true })
   )
   const navigate = useNavigate()
-  const parallaxRef = useRef(null)
-
   useEffect(() => {
     if (!api) {
       return
@@ -72,20 +70,6 @@ const Hero = () => {
     }, 1500)
 
     return () => clearTimeout(timer)
-  }, [])
-
-  // Parallax effect
-  useEffect(() => {
-    const handleScroll = () => {
-      if (parallaxRef.current) {
-        const scrolled = window.pageYOffset
-        const rate = scrolled * -0.5
-        parallaxRef.current.style.transform = `translateY(${rate}px)`
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const toggleAutoplay = () => {
@@ -213,4 +197,3 @@ const Hero = () => {
 }
 
 export default Hero
-
