@@ -96,7 +96,6 @@ const Hero = () => {
         setApi={setApi}
         className="w-full h-full"
         plugins={[autoplay]}
-        ref={parallaxRef}
       >
         <CarouselContent>
           {heroImages.map((slide, index) => (
