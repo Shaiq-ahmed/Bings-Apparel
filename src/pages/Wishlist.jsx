@@ -180,7 +180,7 @@ export default function Wishlist() {
                                     {/* Details */}
                                     <div>
                                         <h3 className="text-lg font-medium text-gray-900 mb-1">{item.name}</h3>
-                                        <p className="text-xl font-semibold text-gray-900">${item.price.toFixed(2)}</p>
+                                        <p className="text-xl font-semibold text-gray-900">{currency}{item.price.toFixed(2)}</p>
                                     </div>
                                 </div>
 
