@@ -152,7 +152,7 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
                     </Link>
 
                     {/* Price with Apple styling */}
-                    <div className="flex items-baseline space-x-2 w-full">
+                    <div className="flex items-baseline space-x-2 w-full h-8">
                         <span className="text-xl font-semibold text-gray-900 tracking-[-0.02em]">
                             {currency}{discountedPrice}
                         </span>
