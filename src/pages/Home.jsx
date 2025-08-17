@@ -7,6 +7,9 @@ import NewsLetter from '../components/NewsLetter'
 import FeaturedProductsCarousel from '@/components/FeaturedProductCarousel'
 import VideoSection from '../components/VideoSection'
 import TestimonialsSection from '../components/TestimonialsSection'
+import FeatureShowcase from '../components/FeatureShowcase'
+import StatsSection from '../components/StatsSection'
+import CollectionShowcase from '../components/CollectionShowcase'
 import { ShopContext } from '@/context/ShopContext'
 
 const Home = ({ searchVisible }) => {
