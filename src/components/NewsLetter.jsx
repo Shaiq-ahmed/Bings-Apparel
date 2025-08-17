@@ -39,7 +39,7 @@ const NewsLetter = () => {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="mb-12"
+                    className="mb-8"
                 >
                     <h2 className="text-4xl md:text-6xl font-semibold text-gray-900 mb-6 tracking-tight">
                         Stay in the know
