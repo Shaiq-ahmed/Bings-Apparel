@@ -42,7 +42,7 @@ const LatestCollection = () => {
             style={{ y, opacity }}
             className="relative py-20 overflow-hidden bg-white"
         >
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8">
                 {/* Apple-style Header */}
                 <motion.div 
                     initial={{ opacity: 0, y: 30 }}
