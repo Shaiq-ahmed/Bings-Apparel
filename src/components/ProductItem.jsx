@@ -12,12 +12,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { isProductInStock } from '../utils/checkStock'
 import { LazyImage } from './ui/loading'
 
-const truncateName = (name, maxLength = 20) => {
+const truncateName = (name, maxLength = 30) => {
     return name.length > maxLength ? `${name.slice(0, maxLength)}...` : name
 }
 
 const ProductItem = ({ id, image, name, price, sizeQuantities, discount, description, rating = 4.5 }) => {
-    const { currency, addToCart, addToWishlist, isInWishlist=true } = useContext(ShopContext)
+    const { currency, addToCart, addToWishlist, isInWishlist = true } = useContext(ShopContext)
     const navigate = useNavigate()
     const [isHovered, setIsHovered] = useState(false)
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -28,7 +28,6 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
     const handleAddToCart = () => {
         if (isInStock) {
             addToCart(id)
-            // You might want to show a notification here
         } else {
             navigate(`/product/${id}`)
         }
@@ -36,11 +35,9 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
 
     const handleAddToWishlist = () => {
         addToWishlist(id)
-        // You might want to show a notification here
     }
 
     const handleImageError = () => {
-        // Fallback to next image if available
         if (image && image.length > 1) {
             setCurrentImageIndex((prev) => (prev + 1) % image.length)
         }
@@ -50,83 +47,85 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             className="w-full group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <Card className="h-full flex flex-col overflow-hidden bg-white hover:shadow-2xl transition-all duration-500 border-0 rounded-xl">
+            <Card className="h-full flex flex-col overflow-hidden bg-white border-0 shadow-none hover:shadow-lg transition-all duration-700 ease-out rounded-3xl">
                 <CardContent className="p-0 relative flex-grow">
-                    {/* Image Container */}
-                    <div className="relative h-0 pb-[120%] overflow-hidden">
+                    {/* Apple-style image container with subtle rounded corners */}
+                    <div className="relative h-0 pb-[110%] overflow-hidden rounded-3xl bg-gray-50">
                         <Link to={`/product/${id}`} className="block absolute inset-0">
                             <LazyImage
                                 src={image && image[currentImageIndex] ? image[currentImageIndex] : '/placeholder-image.jpg'}
                                 alt={name}
-                                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                                className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
                                 onError={handleImageError}
                             />
                         </Link>
                         
-                        {/* Image overlay on hover */}
+                        {/* Minimal overlay on hover - Apple style */}
                         <AnimatePresence>
                             {isHovered && (
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
-                                    className="absolute inset-0 bg-black/20 flex items-center justify-center"
+                                    transition={{ duration: 0.3 }}
+                                    className="absolute inset-0 bg-black/10 flex items-center justify-center"
                                 >
                                     <motion.div
                                         initial={{ scale: 0.8, opacity: 0 }}
                                         animate={{ scale: 1, opacity: 1 }}
                                         exit={{ scale: 0.8, opacity: 0 }}
-                                        className="flex space-x-2"
+                                        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                                        className="flex space-x-4"
                                     >
                                         <Button
                                             size="icon"
-                                            className="w-10 h-10 rounded-full bg-white/90 hover:bg-white transition-all duration-300"
+                                            className="w-11 h-11 rounded-full bg-white/95 hover:bg-white border-0 shadow-lg backdrop-blur-sm transition-all duration-300"
                                             onClick={() => navigate(`/product/${id}`)}
                                         >
-                                            <Eye className="w-4 h-4 text-gray-700" />
+                                            <Eye className="w-4 h-4 text-gray-800" />
                                         </Button>
                                         <Button
                                             size="icon"
-                                            className="w-10 h-10 rounded-full bg-white/90 hover:bg-white transition-all duration-300"
+                                            className="w-11 h-11 rounded-full bg-white/95 hover:bg-white border-0 shadow-lg backdrop-blur-sm transition-all duration-300"
                                             onClick={handleAddToCart}
                                         >
-                                            <ShoppingCart className="w-4 h-4 text-gray-700" />
+                                            <ShoppingCart className="w-4 h-4 text-gray-800" />
                                         </Button>
                                     </motion.div>
                                 </motion.div>
                             )}
                         </AnimatePresence>
 
-                        {/* Badges */}
-                        <div className="absolute top-3 left-3 flex flex-col space-y-2">
+                        {/* Minimal badges - Apple style */}
+                        <div className="absolute top-4 left-4 flex flex-col space-y-2">
                             {discount && (
-                                <Badge className="bg-red-500 text-white px-2 py-1 text-xs font-semibold rounded-full">
+                                <Badge className="bg-red-500/90 text-white px-3 py-1.5 text-xs font-medium rounded-full backdrop-blur-sm border-0">
                                     -{discount}%
                                 </Badge>
                             )}
                             {!isInStock && (
-                                <Badge variant="secondary" className="bg-gray-500 text-white px-2 py-1 text-xs">
+                                <Badge variant="secondary" className="bg-gray-800/90 text-white px-3 py-1.5 text-xs font-medium rounded-full backdrop-blur-sm border-0">
                                     Out of Stock
                                 </Badge>
                             )}
                         </div>
 
-                        {/* Wishlist Button */}
+                        {/* Minimal wishlist button */}
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger asChild>
                                     <Button
                                         variant="outline"
                                         size="icon"
-                                        className="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm hover:bg-white transition-all duration-300 border-0 shadow-lg"
+                                        className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/95 backdrop-blur-sm hover:bg-white transition-all duration-300 border-0 shadow-lg"
                                         onClick={handleAddToWishlist}
                                     >
-                                        <Heart className={`h-4 w-4 ${isInWishlist ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} />
+                                        <Heart className={`h-4 w-4 ${isInWishlist ? 'fill-red-500 text-red-500' : 'text-gray-700'}`} />
                                     </Button>
                                 </TooltipTrigger>
                                 <TooltipContent>
@@ -135,44 +134,45 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
                             </Tooltip>
                         </TooltipProvider>
 
-                        {/* Rating */}
-                        <div className="absolute bottom-3 left-3 flex items-center space-x-1 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full">
+                        {/* Subtle rating indicator */}
+                        <div className="absolute bottom-4 left-4 flex items-center space-x-1.5 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm">
                             <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                            <span className="text-xs font-medium text-gray-700">{rating}</span>
+                            <span className="text-xs font-medium text-gray-800">{rating}</span>
                         </div>
                     </div>
                 </CardContent>
 
-                <CardFooter className="flex flex-col items-start p-4 space-y-3 bg-gradient-to-br from-gray-50 to-white">
-                    {/* Product Name */}
+                {/* Apple-style minimal footer */}
+                <CardFooter className="flex flex-col items-start p-6 space-y-4 bg-white">
+                    {/* Product name with Apple typography */}
                     <Link to={`/product/${id}`} className="block w-full">
-                        <h3 className="font-semibold text-gray-900 text-sm leading-tight hover:text-red-500 transition-colors duration-300">
-                            {truncateName(name, 25)}
+                        <h3 className="font-medium text-gray-900 text-base leading-snug hover:text-blue-600 transition-colors duration-300 tracking-[-0.01em]">
+                            {truncateName(name, 35)}
                         </h3>
                     </Link>
 
-                    {/* Price */}
-                    <div className="flex items-center space-x-2 w-full">
-                        <span className="text-lg font-bold text-gray-900">
-                            {currency} {discountedPrice}
+                    {/* Price with Apple styling */}
+                    <div className="flex items-baseline space-x-2 w-full">
+                        <span className="text-xl font-semibold text-gray-900 tracking-[-0.02em]">
+                            {currency}{discountedPrice}
                         </span>
                         {discount && (
-                            <span className="text-sm line-through text-gray-500">
-                                {currency} {price}
+                            <span className="text-sm line-through text-gray-500 font-normal">
+                                {currency}{price}
                             </span>
                         )}
                     </div>
 
-                    {/* Action Button */}
+                    {/* Minimal action button - Apple style */}
                     <Button
                         variant={isInStock ? "default" : "secondary"}
-                        className="w-full bg-gray-900 hover:bg-gray-800 text-white rounded-lg py-2 text-sm font-medium transition-all duration-300"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full py-3 text-sm font-medium transition-all duration-300 border-0 shadow-sm"
                         onClick={handleAddToCart}
                     >
                         {isInStock ? (
                             <>
                                 <ShoppingCart className="mr-2 h-4 w-4" /> 
-                                Add to Cart
+                                Add to Bag
                             </>
                         ) : (
                             'View Details'
@@ -185,4 +185,3 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
 }
 
 export default ProductItem
-
