@@ -67,38 +67,45 @@ const Rating = () => {
     const totalRatings = fakeRatings.length;
     const averageRating = (fakeRatings.reduce((sum, r) => sum + r.rating, 0) / totalRatings).toFixed(1);
 
-    const loadMoreRatings = useCallback(() => {
+    const loadMoreRatings = () => {
         if (loading || !hasMore) return;
 
         setLoading(true);
         setTimeout(() => {
-            const filteredRatings = filterRating === 'all' 
-                ? fakeRatings 
+            const filteredRatings = filterRating === 'all'
+                ? fakeRatings
                 : fakeRatings.filter(r => r.rating === parseInt(filterRating));
-            
+
             const newRatings = filteredRatings.slice(offset, offset + ratingsPerPage);
             setRatings((prevRatings) => [...prevRatings, ...newRatings]);
             setOffset((prevOffset) => prevOffset + ratingsPerPage);
             setLoading(false);
-            
+
             if (newRatings.length < ratingsPerPage) {
                 setHasMore(false);
             }
         }, 800);
-    }, [loading, hasMore, offset, filterRating]);
+    };
 
     useEffect(() => {
         setRatings([]);
         setOffset(0);
         setHasMore(true);
-    }, [filterRating]);
+        // Load initial ratings when filter changes
+        setTimeout(() => {
+            const filteredRatings = filterRating === 'all'
+                ? fakeRatings
+                : fakeRatings.filter(r => r.rating === parseInt(filterRating));
 
-    // Initial load
-    useEffect(() => {
-        if (ratings.length === 0 && !loading) {
-            loadMoreRatings();
-        }
-    }, [filterRating, ratings.length, loading]);
+            const initialRatings = filteredRatings.slice(0, ratingsPerPage);
+            setRatings(initialRatings);
+            setOffset(ratingsPerPage);
+
+            if (initialRatings.length < ratingsPerPage) {
+                setHasMore(false);
+            }
+        }, 100);
+    }, [filterRating, fakeRatings]);
 
     const renderStars = (rating) => {
         return [...Array(5)].map((_, i) => (
