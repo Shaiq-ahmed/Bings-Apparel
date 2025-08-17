@@ -146,8 +146,8 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
                 <CardFooter className="flex flex-col items-start p-6 space-y-4 bg-white">
                     {/* Product name with Apple typography */}
                     <Link to={`/product/${id}`} className="block w-full">
-                        <h3 className="font-medium text-gray-900 text-base leading-snug hover:text-blue-600 transition-colors duration-300 tracking-[-0.01em]">
-                            {truncateName(name, 35)}
+                        <h3 className="font-medium text-gray-900 text-base leading-snug hover:text-blue-600 transition-colors duration-300 tracking-[-0.01em] h-12 flex items-center">
+                            {truncateName(name, 25)}
                         </h3>
                     </Link>
 
