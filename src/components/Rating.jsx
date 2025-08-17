@@ -24,13 +24,7 @@ const generateFakeRatings = (num) => {
         const rating = {
             id: faker.string.uuid(),
             userId: faker.person.firstName() + " " + faker.person.lastName().charAt(0) + ".",
-            rating: faker.helpers.weighted([
-                { weight: 45, value: 5 },
-                { weight: 25, value: 4 },
-                { weight: 15, value: 3 },
-                { weight: 10, value: 2 },
-                { weight: 5, value: 1 }
-            ]),
+            rating: faker.number.int({ min: 3, max: 5 }) > 3 ? 5 : faker.number.int({ min: 1, max: 5 }),
             review: faker.helpers.arrayElement(reviewTemplates),
             createdAt: faker.date.past(),
             verified: faker.datatype.boolean(),
