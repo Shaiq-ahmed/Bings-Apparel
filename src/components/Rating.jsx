@@ -91,8 +91,14 @@ const Rating = () => {
         setRatings([]);
         setOffset(0);
         setHasMore(true);
-        loadMoreRatings();
     }, [filterRating]);
+
+    // Initial load
+    useEffect(() => {
+        if (ratings.length === 0 && !loading) {
+            loadMoreRatings();
+        }
+    }, [filterRating, ratings.length, loading]);
 
     const renderStars = (rating) => {
         return [...Array(5)].map((_, i) => (
