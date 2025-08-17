@@ -12,7 +12,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { isProductInStock } from '../utils/checkStock'
 import { LazyImage } from './ui/loading'
 
-const truncateName = (name, maxLength = 30) => {
+const truncateName = (name, maxLength = 25) => {
     return name.length > maxLength ? `${name.slice(0, maxLength)}...` : name
 }
 
