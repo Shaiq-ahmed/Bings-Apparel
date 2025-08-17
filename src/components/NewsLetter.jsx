@@ -31,9 +31,9 @@ const NewsLetter = () => {
         <motion.section
             ref={containerRef}
             style={{ y, opacity }}
-            className="w-full py-10 bg-gray-50"
+            className="w-full py-6 bg-gray-50"
         >
-            <div className="w-full px-4 sm:px-6 lg:px-8 text-center">
+            <div className="w-full px-2.5 text-center">
                 {/* Apple-style minimalist header */}
                 <motion.div 
                     initial={{ opacity: 0, y: 30 }}
