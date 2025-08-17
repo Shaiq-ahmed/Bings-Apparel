@@ -98,6 +98,21 @@ const ShopContextProvider = (props) => {
         return { subtotal, shippingFee, totalAmount };
     };
 
+    // Wishlist functions
+    const addToWishlist = (productId) => {
+        if (!wishlistItems.includes(productId)) {
+            setWishlistItems(prev => [...prev, productId]);
+            toast.success("Added to wishlist!");
+        } else {
+            setWishlistItems(prev => prev.filter(id => id !== productId));
+            toast.success("Removed from wishlist!");
+        }
+    };
+
+    const isInWishlist = (productId) => {
+        return wishlistItems.includes(productId);
+    };
+
     useEffect(() => {
         console.log("cartItems", cartItems);
     }, [cartItems]);
