@@ -25,7 +25,7 @@ const RelatedProducts = ({category, subCategory}) => {
                 product.category === category && product.subCategory === subCategory
             );
             const shuffledProducts = shuffleArray(filteredProducts);
-            setRelatedProducts(shuffledProducts.slice(0, 8)); // Show more products
+            setRelatedProducts(shuffledProducts.slice(0, 6)); // Show 6 products like Apple
         }    
     }, [products, category, subCategory]);
 
@@ -56,22 +56,18 @@ const RelatedProducts = ({category, subCategory}) => {
             </div>
             
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Section Header */}
-                <motion.div 
+                {/* Apple-style Section Header */}
+                <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-12"
+                    className="text-center mb-16"
                 >
-                    <div className="flex items-center justify-center space-x-2 mb-4">
-                        <Sparkles className="w-5 h-5 text-red-500" />
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                            Related Products
-                        </h2>
-                        <Sparkles className="w-5 h-5 text-red-500" />
-                    </div>
-                    <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                        Discover more items from the same collection that match your style
+                    <h2 className="text-4xl md:text-6xl font-semibold text-gray-900 mb-4 tracking-tight">
+                        Explore the lineup.
+                    </h2>
+                    <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+                        Take a closer look at our featured collection.
                     </p>
                 </motion.div>
 
@@ -86,7 +82,7 @@ const RelatedProducts = ({category, subCategory}) => {
                     <div className="absolute -top-4 -left-4 w-8 h-8 bg-red-500 rounded-full opacity-20 animate-pulse"></div>
                     <div className="absolute -bottom-4 -right-4 w-6 h-6 bg-blue-500 rounded-full opacity-20 animate-pulse animation-delay-1000"></div>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 lg:gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
                         {relatedProducts.map((product, index) => (
                             <motion.div 
                                 key={product._id}
@@ -117,19 +113,16 @@ const RelatedProducts = ({category, subCategory}) => {
                     </div>
                 </motion.div>
 
-                {/* View All Button */}
-                <motion.div 
+                {/* Apple-style View All Link */}
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
-                    className="text-center mt-12"
+                    className="text-center mt-16"
                 >
-                    <Button 
-                        className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                    >
-                        View All Products
-                        <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
+                    <a href="/collection" className="text-blue-600 hover:text-blue-700 text-lg font-medium transition-colors duration-300">
+                        Compare all models <ArrowRight className="inline ml-1 h-4 w-4" />
+                    </a>
                 </motion.div>
             </div>
         </motion.div>
