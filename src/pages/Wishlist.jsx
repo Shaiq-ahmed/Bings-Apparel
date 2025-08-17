@@ -60,7 +60,7 @@ export default function Wishlist() {
         }
     }
 
-    const filteredAndSortedItems = sortItems(wishlistItems).filter(item => !showInStock || item.inStock)
+    const filteredAndSortedItems = sortItems(displayWishlist).filter(item => !showInStock || item.inStock)
 
     return (
         <div className="min-h-screen bg-white py-20">
