@@ -24,7 +24,14 @@ const generateFakeRatings = (num) => {
         const rating = {
             id: faker.string.uuid(),
             userId: faker.person.firstName() + " " + faker.person.lastName().charAt(0) + ".",
-            rating: faker.number.int({ min: 3, max: 5 }) > 3 ? 5 : faker.number.int({ min: 1, max: 5 }),
+            rating: (() => {
+                const rand = Math.random();
+                if (rand < 0.45) return 5;
+                if (rand < 0.70) return 4;
+                if (rand < 0.85) return 3;
+                if (rand < 0.95) return 2;
+                return 1;
+            })(),
             review: faker.helpers.arrayElement(reviewTemplates),
             createdAt: faker.date.past(),
             verified: Math.random() > 0.3,
