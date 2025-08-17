@@ -41,7 +41,7 @@ export default function Wishlist() {
     }
 
     const sortItems = (items) => {
-        return items.sort((a, b) => {
+        return [...items].sort((a, b) => {
             if (sortOrder === "name-asc") return a.name.localeCompare(b.name)
             if (sortOrder === "name-desc") return b.name.localeCompare(a.name)
             if (sortOrder === "price-asc") return a.price - b.price
