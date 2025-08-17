@@ -1,23 +1,21 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { ArrowRight, Star, Users, Award, Heart, Globe, Shield } from 'lucide-react';
+import { ArrowRight, Users, Award, Heart, Globe, Shield, Leaf } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Aboutus = () => {
   const containerRef = useRef(null);
   const navigate = useNavigate();
   
-  // Parallax effect
+  // Apple-style subtle parallax
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0.8]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, -15]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.9]);
 
   const stats = [
     { icon: Users, number: "50K+", label: "Happy Customers" },
@@ -30,54 +28,61 @@ const Aboutus = () => {
     {
       icon: Shield,
       title: "Quality First",
-      description: "Every piece is crafted with premium materials and attention to detail"
+      description: "Every piece is crafted with premium materials and attention to detail that stands the test of time"
     },
     {
       icon: Heart,
-      title: "Customer Love",
-      description: "We prioritize your satisfaction and style preferences above all"
+      title: "Customer Centric",
+      description: "We prioritize your satisfaction and style preferences, creating pieces that make you feel confident"
     },
     {
-      icon: Globe,
-      title: "Global Reach",
-      description: "Serving fashion enthusiasts worldwide with our unique collections"
+      icon: Leaf,
+      title: "Sustainable Future",
+      description: "Committed to ethical sourcing and eco-friendly practices for a better tomorrow"
     }
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <motion.section 
         className="relative h-screen flex items-center justify-center overflow-hidden"
-        style={{ backgroundImage: `url(https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=1080&fit=crop&q=80)` }}
       >
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="relative z-10 text-center text-white">
+        <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=1080&fit=crop&q=80"
+            alt="About Us"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
+        
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-6xl md:text-8xl font-bold mb-6"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-5xl md:text-7xl font-semibold mb-6 tracking-tight"
           >
             About Us
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl max-w-3xl mx-auto mb-8"
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-xl md:text-2xl font-light leading-relaxed mb-8"
           >
             Celebrating fashion, sustainability, and quality since 2019. 
-            We're more than just a brand - we're a movement.
+            We're more than just a brand — we're a movement.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           >
             <Button 
               onClick={() => navigate('/collection')}
-              className="bg-white text-black hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-full"
+              className="bg-white text-black hover:bg-gray-100 px-8 py-4 text-lg font-medium rounded-full shadow-none hover:shadow-lg transition-all duration-300"
             >
               Explore Our Collection
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -90,21 +95,21 @@ const Aboutus = () => {
       <motion.section 
         ref={containerRef}
         style={{ y, opacity }}
-        className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50"
+        className="py-20 bg-white"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-6xl font-semibold text-gray-900 mb-8 tracking-tight">
               Our Story
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto font-light leading-relaxed">
               We started with a vision to redefine fashion through sustainability and quality. 
-              Our journey began in 2019, and today, we are proud to be a leading name in 
+              Our journey began in 2019, and today, we're proud to be a leading name in 
               eco-friendly fashion that doesn't compromise on style or comfort.
             </p>
           </motion.div>
@@ -113,22 +118,22 @@ const Aboutus = () => {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16"
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20"
           >
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="w-8 h-8 text-red-500" />
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <stat.icon className="w-8 h-8 text-gray-900" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900">{stat.number}</div>
-                <div className="text-gray-600">{stat.label}</div>
+                <div className="text-3xl md:text-4xl font-semibold text-gray-900 mb-2">{stat.number}</div>
+                <div className="text-gray-600 font-medium">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -137,7 +142,7 @@ const Aboutus = () => {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
             {values.map((value, index) => (
@@ -145,14 +150,14 @@ const Aboutus = () => {
                 key={value.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-300"
+                transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                className="text-center p-8"
               >
-                <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="w-8 h-8 text-red-500" />
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <value.icon className="w-8 h-8 text-gray-900" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">{value.title}</h3>
+                <p className="text-gray-600 font-light leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -160,20 +165,18 @@ const Aboutus = () => {
       </motion.section>
 
       {/* Featured Collections */}
-      <motion.section 
-        className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-900"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-6xl font-semibold text-gray-900 mb-8 tracking-tight">
               Featured Collections
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto font-light">
               Discover our seasonal collections that blend timeless elegance with contemporary flair
             </p>
           </motion.div>
@@ -200,32 +203,28 @@ const Aboutus = () => {
                 key={item.season}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="group"
+                transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                whileHover={{ y: -8 }}
+                className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
               >
-                <Card className="overflow-hidden bg-white/10 backdrop-blur-sm border-white/20">
-                  <div className="relative h-64 overflow-hidden">
-                    <img
-                      src={item.img}
-                      alt={item.season}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
-                  </div>
-                  <div className="p-6 text-white">
-                    <h3 className="text-xl font-bold mb-2">{item.season}</h3>
-                    <p className="text-gray-300 mb-4">{item.description}</p>
-                    <Button 
-                      variant="outline" 
-                      className="border-white text-white hover:bg-white hover:text-black"
-                      onClick={() => navigate('/collection')}
-                    >
-                      Shop {item.season}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                </Card>
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={item.img}
+                    alt={item.season}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-8">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.season}</h3>
+                  <p className="text-gray-600 font-light mb-6">{item.description}</p>
+                  <Button 
+                    onClick={() => navigate('/collection')}
+                    className="bg-black text-white hover:bg-gray-800 px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center space-x-2"
+                  >
+                    <span>Shop {item.season}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -233,19 +232,20 @@ const Aboutus = () => {
       </motion.section>
 
       {/* Sustainability Promise */}
-      <motion.section 
-        className="relative py-20 overflow-hidden bg-gradient-to-br from-green-50 via-white to-green-50"
-      >
+      <motion.section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
+              <Leaf className="w-10 h-10 text-green-600" />
+            </div>
+            <h2 className="text-4xl md:text-6xl font-semibold text-gray-900 mb-8 tracking-tight">
               Our Commitment to Sustainability
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 font-light leading-relaxed">
               We believe in ethical sourcing, reducing waste, and crafting products that last. 
               Every purchase you make supports a greener planet and a better future for fashion.
             </p>

@@ -4,9 +4,8 @@ import { useState } from "react"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { motion } from "framer-motion"
-import {Link} from "react-router-dom"
-import LoginPlaceholder from "../assets/assets/frontend_assets/LoginPlaceholder.png"
-
+import { Link } from "react-router-dom"
+import { Eye, EyeOff } from 'lucide-react'
 
 const registerSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -21,6 +20,8 @@ const registerSchema = Yup.object().shape({
 
 export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const formik = useFormik({
     initialValues: {
@@ -40,154 +41,162 @@ export default function SignUp() {
   })
 
   return (
-    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      <img
-        src={LoginPlaceholder}
-        alt="Register background"
-        className="absolute inset-0 w-full h-full object-cover opacity-50 sm:opacity-30"
-      />
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white/80 backdrop-blur-md p-8 shadow-xl rounded-lg w-full"
-          >
-            <div className="mb-8 text-center">
-              <h2 className="text-3xl font-bold text-gray-900">Create Account</h2>
-              <p className="mt-2 text-sm text-gray-600">
-                Join us and start your journey
-              </p>
-            </div>
-            <form onSubmit={formik.handleSubmit} className="space-y-6">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="space-y-8"
+        >
+          {/* Header */}
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight">
+              Create account
+            </h2>
+            <p className="mt-4 text-lg text-gray-600 font-light">
+              Join us and start your journey
+            </p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={formik.handleSubmit} className="space-y-6">
+            <div className="space-y-5">
+              {/* Name */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                  Name
-                </label>
                 <input
                   id="name"
                   type="text"
                   {...formik.getFieldProps("name")}
-                  className={`mt-1 block w-full rounded-md border ${
+                  placeholder="Full name"
+                  className={`w-full px-4 py-4 text-lg border-0 border-b-2 ${
                     formik.touched.name && formik.errors.name
                       ? "border-red-500"
-                      : "border-gray-300"
-                  } px-3 py-2 shadow-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black bg-white/50`}
+                      : "border-gray-200 focus:border-gray-900"
+                  } bg-transparent focus:outline-none focus:ring-0 transition-colors duration-300 placeholder-gray-400`}
                 />
                 {formik.touched.name && formik.errors.name && (
                   <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-1 text-sm text-red-500"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="mt-2 text-sm text-red-500"
                   >
                     {formik.errors.name}
                   </motion.p>
                 )}
               </div>
 
+              {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Email
-                </label>
                 <input
                   id="email"
                   type="email"
                   {...formik.getFieldProps("email")}
-                  className={`mt-1 block w-full rounded-md border ${
+                  placeholder="Email"
+                  className={`w-full px-4 py-4 text-lg border-0 border-b-2 ${
                     formik.touched.email && formik.errors.email
                       ? "border-red-500"
-                      : "border-gray-300"
-                  } px-3 py-2 shadow-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black bg-white/50`}
+                      : "border-gray-200 focus:border-gray-900"
+                  } bg-transparent focus:outline-none focus:ring-0 transition-colors duration-300 placeholder-gray-400`}
                 />
                 {formik.touched.email && formik.errors.email && (
                   <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-1 text-sm text-red-500"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="mt-2 text-sm text-red-500"
                   >
                     {formik.errors.email}
                   </motion.p>
                 )}
               </div>
 
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  Password
-                </label>
+              {/* Password */}
+              <div className="relative">
                 <input
                   id="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   {...formik.getFieldProps("password")}
-                  className={`mt-1 block w-full rounded-md border ${
+                  placeholder="Password"
+                  className={`w-full px-4 py-4 pr-12 text-lg border-0 border-b-2 ${
                     formik.touched.password && formik.errors.password
                       ? "border-red-500"
-                      : "border-gray-300"
-                  } px-3 py-2 shadow-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black bg-white/50`}
+                      : "border-gray-200 focus:border-gray-900"
+                  } bg-transparent focus:outline-none focus:ring-0 transition-colors duration-300 placeholder-gray-400`}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
                 {formik.touched.password && formik.errors.password && (
                   <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-1 text-sm text-red-500"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="mt-2 text-sm text-red-500"
                   >
                     {formik.errors.password}
                   </motion.p>
                 )}
               </div>
 
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                  Confirm Password
-                </label>
+              {/* Confirm Password */}
+              <div className="relative">
                 <input
                   id="confirmPassword"
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   {...formik.getFieldProps("confirmPassword")}
-                  className={`mt-1 block w-full rounded-md border ${
+                  placeholder="Confirm password"
+                  className={`w-full px-4 py-4 pr-12 text-lg border-0 border-b-2 ${
                     formik.touched.confirmPassword && formik.errors.confirmPassword
                       ? "border-red-500"
-                      : "border-gray-300"
-                  } px-3 py-2 shadow-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black bg-white/50`}
+                      : "border-gray-200 focus:border-gray-900"
+                  } bg-transparent focus:outline-none focus:ring-0 transition-colors duration-300 placeholder-gray-400`}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
                 {formik.touched.confirmPassword && formik.errors.confirmPassword && (
                   <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-1 text-sm text-red-500"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="mt-2 text-sm text-red-500"
                   >
                     {formik.errors.confirmPassword}
                   </motion.p>
                 )}
               </div>
+            </div>
 
-              <motion.div
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+            {/* Submit button */}
+            <motion.button
+              type="submit"
+              disabled={isLoading}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              className="w-full bg-black text-white py-4 px-6 text-lg font-medium rounded-full hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-none hover:shadow-lg"
+            >
+              {isLoading ? "Creating account..." : "Create account"}
+            </motion.button>
+
+            {/* Sign in link */}
+            <p className="text-center text-gray-600">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="font-medium text-gray-900 hover:text-gray-700 transition-colors"
               >
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full rounded-md bg-black py-2 px-4 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
-                >
-                  {isLoading ? "Creating Account..." : "Create Account"}
-                </button>
-              </motion.div>
-
-              <p className="text-center text-sm text-gray-600">
-                Already have an account?{" "}
-                <Link
-                  to="/login"
-                  className="font-medium text-gray-700 hover:text-gray-900"
-                >
-                  Sign in
-                </Link>
-              </p>
-            </form>
-          </motion.div>
-        </div>
+                Sign in
+              </Link>
+            </p>
+          </form>
+        </motion.div>
       </div>
     </div>
   )
 }
-

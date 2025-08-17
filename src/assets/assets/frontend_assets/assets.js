@@ -96,202 +96,243 @@ export const assets = {
 }
 
 export const products = [
+    // Premium Women's Collection
     {
-        _id: "aaaap",
-        name: "Girls Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 170,
-        image: [p_img16],
-        category: "Kids",
+        _id: "AESTHETIC_001",
+        name: "Minimalist Cashmere Sweater",
+        description: "Luxuriously soft cashmere sweater with a minimalist design. Perfect for both casual and professional settings.",
+        price: 189,
+        image: [
+            "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=600&h=800&fit=crop&q=80"
+        ],
+        category: "Women",
         subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
+        sizes: ["XS", "S", "M", "L", "XL"],
         sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
+            XS: 8,
+            S: 15,
+            M: 20,
+            L: 12,
+            XL: 5
         },
-        date: 1716628845448,
+        date: Date.now(),
+        bestseller: true,
+        discount: 15
+    },
+    {
+        _id: "AESTHETIC_002",
+        name: "Classic White Button-Down Shirt",
+        description: "Timeless white cotton shirt with a perfect fit. A wardrobe essential that never goes out of style.",
+        price: 89,
+        image: [
+            "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&h=800&fit=crop&q=80"
+        ],
+        category: "Women",
+        subCategory: "TopWear",
+        sizes: ["XS", "S", "M", "L", "XL"],
+        sizeQuantities: {
+            XS: 10,
+            S: 18,
+            M: 25,
+            L: 15,
+            XL: 8
+        },
+        date: Date.now(),
+        bestseller: true,
+        discount: 10
+    },
+    {
+        _id: "AESTHETIC_003",
+        name: "High-Waisted Wide Leg Trousers",
+        description: "Elegant wide-leg trousers in premium wool blend. Features a high waist and tailored fit for a sophisticated silhouette.",
+        price: 145,
+        image: [
+            "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1506629905398-b5f54d3e0127?w=600&h=800&fit=crop&q=80"
+        ],
+        category: "Women",
+        subCategory: "BottomWear",
+        sizes: ["XS", "S", "M", "L", "XL"],
+        sizeQuantities: {
+            XS: 6,
+            S: 12,
+            M: 18,
+            L: 14,
+            XL: 6
+        },
+        date: Date.now(),
         bestseller: false,
         discount: 20
     },
     {
-        _id: "aaaaq",
-        name: "Men Tapered Fit Flat-Front Trousers",
-        description: "A stylish pair of trousers designed for comfort and elegance.",
-        price: 150,
-        image: [p_img17],
+        _id: "AESTHETIC_004",
+        name: "Oversized Blazer",
+        description: "Contemporary oversized blazer in a structured design. Perfect for creating sharp, professional looks with modern edge.",
+        price: 225,
+        image: [
+            "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1544957992-20514f595d6f?w=600&h=800&fit=crop&q=80"
+        ],
+        category: "Women",
+        subCategory: "TopWear",
+        sizes: ["XS", "S", "M", "L", "XL"],
+        sizeQuantities: {
+            XS: 4,
+            S: 8,
+            M: 12,
+            L: 10,
+            XL: 6
+        },
+        date: Date.now(),
+        bestseller: true,
+        discount: 12
+    },
+    
+    // Premium Men's Collection
+    {
+        _id: "AESTHETIC_005",
+        name: "Premium Cotton T-Shirt",
+        description: "Ultra-soft premium cotton t-shirt with perfect fit. Made from 100% organic cotton for comfort and sustainability.",
+        price: 65,
+        image: [
+            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&h=800&fit=crop&q=80"
+        ],
+        category: "Men",
+        subCategory: "TopWear",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeQuantities: {
+            S: 15,
+            M: 25,
+            L: 30,
+            XL: 20,
+            XXL: 10
+        },
+        date: Date.now(),
+        bestseller: true,
+        discount: 8
+    },
+    {
+        _id: "AESTHETIC_006",
+        name: "Tailored Dress Shirt",
+        description: "Crisp white dress shirt with modern tailoring. Features mother-of-pearl buttons and French seams for durability.",
+        price: 125,
+        image: [
+            "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=600&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=800&fit=crop&q=80"
+        ],
+        category: "Men",
+        subCategory: "TopWear",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        sizeQuantities: {
+            S: 8,
+            M: 15,
+            L: 20,
+            XL: 12,
+            XXL: 5
+        },
+        date: Date.now(),
+        bestseller: false,
+        discount: 15
+    },
+    {
+        _id: "AESTHETIC_007",
+        name: "Slim Fit Chinos",
+        description: "Classic chino pants in a modern slim fit. Made from stretch cotton twill for comfort and style.",
+        price: 95,
+        image: [
+            "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600&h=800&fit=crop&q=80"
+        ],
         category: "Men",
         subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
+        sizes: ["S", "M", "L", "XL", "XXL"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 12,
+            M: 20,
+            L: 25,
+            XL: 15,
+            XXL: 8
         },
-        date: 1716629945448,
-        bestseller: false,
-        //: 0 // Out of stock
+        date: Date.now(),
+        bestseller: true,
+        discount: 18
     },
     {
-        _id: "aaaar",
-        name: "Boy Round Neck Pure Cotton T-shirt",
-        description: "A comfortable cotton t-shirt perfect for everyday wear.",
-        price: 180,
-        image: [p_img18],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716631045448,
-        bestseller: false,
-        //: 3,
-        discount: 20
-    },
-    {
-        _id: "aaaas",
-        name: "Boy Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, breathable t-shirt for boys.",
-        price: 160,
-        image: [p_img19],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716632145448,
-        bestseller: false,
-        //: 0 // Out of stock
-    },
-    {
-        _id: "aaaat",
-        name: "Women Palazzo Pants with Waist Belt",
-        description: "Stylish palazzo pants that offer comfort and elegance.",
-        price: 190,
-        image: [p_img20],
-        category: "Women",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716633245448,
-        bestseller: false,
-        //: 4
-    },
-    {
-        _id: "aaaau",
-        name: "Women Zip-Front Relaxed Fit Jacket",
-        description: "A cozy jacket perfect for chilly days.",
-        price: 170,
-        image: [p_img21],
-        category: "Women",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716634345448,
-        bestseller: false,
-        //: 2,
-        discount: 20
-    },
-    {
-        _id: "aaaav",
-        name: "Women Palazzo Pants with Waist Belt",
-        description: "Elegant palazzo pants with a stylish waist belt.",
-        price: 200,
-        image: [p_img22],
-        category: "Women",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716635445448,
-        bestseller: false,
-        //: 5,
-        discount: 20
-    },
-    {
-        _id: "aaaaw",
-        name: "Boy Round Neck Pure Cotton T-shirt",
-        description: "A classic round neck t-shirt for boys.",
-        price: 180,
-        image: [p_img23],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716636545448,
-        bestseller: false,
-        //: 0, // Out of stock
-        discount: 20
-    },
-    {
-        _id: "aaaax",
-        name: "Girls Floral Print Dress",
-        description: "A beautiful floral dress perfect for summer.",
-        price: 220,
-        image: [p_img16],
-        category: "Kids",
-        subCategory: "Dresses",
-        sizes: ["S", "M", "L"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716637645448,
-        bestseller: false,
-        //: 6,
-        discount: 20
-    },
-    {
-        _id: "aaaay",
-        name: "Men Casual Sneakers",
-        description: "Comfortable sneakers for everyday wear.",
-        price: 120,
-        image: [p_img17],
+        _id: "AESTHETIC_008",
+        name: "Merino Wool Cardigan",
+        description: "Luxurious merino wool cardigan with a timeless design. Features ribbed trim and horn buttons.",
+        price: 165,
+        image: [
+            "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&q=80"
+        ],
         category: "Men",
-        subCategory: "Footwear",
-        sizes: ["S", "M", "XL"],
+        subCategory: "TopWear",
+        sizes: ["S", "M", "L", "XL", "XXL"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 6,
+            M: 12,
+            L: 15,
+            XL: 10,
+            XXL: 4
         },
-        date: 1716638745448,
+        date: Date.now(),
         bestseller: false,
-        //: 3,
-        discount: 30
+        discount: 22
     },
+
+    // Kids Collection
+    {
+        _id: "AESTHETIC_009",
+        name: "Organic Cotton Kids T-Shirt",
+        description: "Super soft organic cotton t-shirt for kids. Safe, comfortable, and eco-friendly with fun, minimalist designs.",
+        price: 35,
+        image: [
+            "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=600&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=600&h=800&fit=crop&q=80"
+        ],
+        category: "Kids",
+        subCategory: "TopWear",
+        sizes: ["2T", "3T", "4T", "5T", "6T"],
+        sizeQuantities: {
+            "2T": 10,
+            "3T": 15,
+            "4T": 18,
+            "5T": 12,
+            "6T": 8
+        },
+        date: Date.now(),
+        bestseller: true,
+        discount: 12
+    },
+    {
+        _id: "AESTHETIC_010",
+        name: "Kids Comfortable Joggers",
+        description: "Cozy joggers perfect for play and rest. Made from organic cotton blend with adjustable waistband.",
+        price: 45,
+        image: [
+            "https://images.unsplash.com/photo-1586328409194-5e3fef6ca2df?w=600&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1561789934-aae5a783899c?w=600&h=800&fit=crop&q=80"
+        ],
+        category: "Kids",
+        subCategory: "BottomWear",
+        sizes: ["2T", "3T", "4T", "5T", "6T"],
+        sizeQuantities: {
+            "2T": 8,
+            "3T": 12,
+            "4T": 15,
+            "5T": 10,
+            "6T": 6
+        },
+        date: Date.now(),
+        bestseller: false,
+        discount: 15
+    },
+
+    // Keep existing products for backward compatibility
     {
         _id: "aaaaa",
         name: "Women Round Neck Cotton Top",
@@ -302,10 +343,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["S", "M", "L"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 5,
+            M: 3,
+            L: 0,
+            XL: 2
         },
         date: 1716634345448,
         bestseller: true,
@@ -321,10 +362,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["M", "L", "XL"],
         sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
+            S: 0,
+            M: 0,
+            L: 0,
+            XL: 0
         },
         date: 1716621345448,
         bestseller: true,
@@ -340,10 +381,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["S", "L", "XL"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 5,
+            M: 3,
+            L: 0,
+            XL: 2
         },
         date: 1716234545448,
         bestseller: true,
@@ -359,10 +400,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["S", "M", "XXL"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 5,
+            M: 3,
+            L: 0,
+            XL: 2
         },
         date: 1716621345448,
         bestseller: true,
@@ -378,10 +419,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["M", "L", "XL"],
         sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
+            S: 0,
+            M: 0,
+            L: 0,
+            XL: 0
         },
         date: 1716622345448,
         bestseller: true
@@ -396,10 +437,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["S", "L", "XL"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 5,
+            M: 3,
+            L: 0,
+            XL: 2
         },
         date: 1716623423448,
         bestseller: true
@@ -414,10 +455,10 @@ export const products = [
         subCategory: "BottomWear",
         sizes: ["S", "L", "XL"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 5,
+            M: 3,
+            L: 0,
+            XL: 2
         },
         date: 1716621542448,
         bestseller: false
@@ -432,10 +473,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["S", "M", "L", "XL"],
         sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
+            S: 0,
+            M: 0,
+            L: 0,
+            XL: 0
         },
         date: 1716622345448,
         bestseller: false
@@ -450,10 +491,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["M", "L", "XL"],
         sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
+            S: 0,
+            M: 0,
+            L: 0,
+            XL: 0
         },
         date: 1716621235448,
         bestseller: false
@@ -468,10 +509,10 @@ export const products = [
         subCategory: "BottomWear",
         sizes: ["S", "L", "XL"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 5,
+            M: 3,
+            L: 0,
+            XL: 2
         },
         date: 1716622235448,
         bestseller: false
@@ -486,10 +527,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["S", "M", "L"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 5,
+            M: 3,
+            L: 0,
+            XL: 2
         },
         date: 1716623345448,
         bestseller: false
@@ -504,10 +545,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["S", "M", "L", "XL"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 5,
+            M: 3,
+            L: 0,
+            XL: 2
         },
         date: 1716624445448,
         bestseller: false
@@ -522,10 +563,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["S", "M", "L", "XL"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL 
+            S: 5,
+            M: 3,
+            L: 0,
+            XL: 2
         },
         date: 1716625545448,
         bestseller: false
@@ -540,10 +581,10 @@ export const products = [
         subCategory: "TopWear",
         sizes: ["S", "M", "L", "XL"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 5,
+            M: 3,
+            L: 0,
+            XL: 2
         },
         date: 1716626645448,
         bestseller: false
@@ -558,908 +599,12 @@ export const products = [
         subCategory: "BottomWear",
         sizes: ["S", "M", "L", "XL"],
         sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
+            S: 5,
+            M: 3,
+            L: 0,
+            XL: 2
         },
         date: 1716627745448,
         bestseller: false
-    },
-    {
-        _id: "aaaap90119",
-        name: "Girls Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 170,
-        image: [p_img16],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716628845448,
-        bestseller: false
-    },
-    {
-        _id: "aaaaq",
-        name: "Men Tapered Fit Flat-Front Trousers",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 150,
-        image: [p_img17],
-        category: "Men",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716629945448,
-        bestseller: false
-    },
-    {
-        _id: "aaaar",
-        name: "Boy Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 180,
-        image: [p_img18],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716631045448,
-        bestseller: false
-    },
-    {
-        _id: "aaaas",
-        name: "Boy Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 160,
-        image: [p_img19],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716632145448,
-        bestseller: false
-    },
-    {
-        _id: "aaaat",
-        name: "Women Palazzo Pants with Waist Belt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 190,
-        image: [p_img20],
-        category: "Women",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716633245448,
-        bestseller: false
-    },
-    {
-        _id: "aaaau",
-        name: "Women Zip-Front Relaxed Fit Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 170,
-        image: [p_img21],
-        category: "Women",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716634345448,
-        bestseller: false
-    },
-    {
-        _id: "aaaav",
-        name: "Women Palazzo Pants with Waist Belt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 200,
-        image: [p_img22],
-        category: "Women",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716635445448,
-        bestseller: false
-    },
-    {
-        _id: "aaaaw",
-        name: "Boy Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 180,
-        image: [p_img23],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716636545448,
-        bestseller: false
-    },
-    {
-        _id: "aaaa818",
-        name: "Boy Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 210,
-        image: [p_img24],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716637645448,
-        bestseller: false
-    },
-    {
-        _id: "aaaay",
-        name: "Girls Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 190,
-        image: [p_img25],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716638745448,
-        bestseller: false
-    },
-    {
-        _id: "aaaaz",
-        name: "Women Zip-Front Relaxed Fit Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 220,
-        image: [p_img26],
-        category: "Women",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716639845448,
-        bestseller: false
-    },
-    {
-        _id: "aaaba",
-        name: "Girls Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 200,
-        image: [p_img27],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716640945448,
-        bestseller: false
-    },
-    {
-        _id: "aaabb",
-        name: "Men Slim Fit Relaxed Denim Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 230,
-        image: [p_img28],
-        category: "Men",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716642045448,
-        bestseller: false
-    },
-    {
-        _id: "aaabc",
-        name: "Women Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 210,
-        image: [p_img29],
-        category: "Women",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716643145448,
-        bestseller: false
-    },
-    {
-        _id: "aaabd",
-        name: "Girls Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 240,
-        image: [p_img30],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716644245448,
-        bestseller: false
-    },
-    {
-        _id: "aaabe",
-        name: "Men Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 220,
-        image: [p_img31],
-        category: "Men",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716645345448,
-        bestseller: false
-    },
-    {
-        _id: "aaabf",
-        name: "Men Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 250,
-        image: [p_img32],
-        category: "Men",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716646445448,
-        bestseller: false
-    },
-    {
-        _id: "aaabg",
-        name: "Girls Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 230,
-        image: [p_img33],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716647545448,
-        bestseller: false
-    },
-    {
-        _id: "aaabh",
-        name: "Women Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 260,
-        image: [p_img34],
-        category: "Women",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716648645448,
-        bestseller: false
-    },
-    {
-        _id: "aaabi",
-        name: "Women Zip-Front Relaxed Fit Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 240,
-        image: [p_img35],
-        category: "Women",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716649745448,
-        bestseller: false
-    },
-    {
-        _id: "aaabj",
-        name: "Women Zip-Front Relaxed Fit Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 270,
-        image: [p_img36],
-        category: "Women",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716650845448,
-        bestseller: false
-    },
-    {
-        _id: "aaabk",
-        name: "Women Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 250,
-        image: [p_img37],
-        category: "Women",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716651945448,
-        bestseller: false
-    },
-    {
-        _id: "aaabl",
-        name: "Men Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 280,
-        image: [p_img38],
-        category: "Men",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 1, // Available quantity for size S
-            M: 10, // Available quantity for size M
-            L: 20, // Out of stock for size L
-            XL: 30 // Available quantity for size XL
-        },
-        date: 1716653045448,
-        bestseller: false
-    },
-    {
-        _id: "aaabm",
-        name: "Men Printed Plain Cotton Shirt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 260,
-        image: [p_img39],
-        category: "Men",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716654145448,
-        bestseller: false
-    },
-    {
-        _id: "aaabn",
-        name: "Men Slim Fit Relaxed Denim Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 290,
-        image: [p_img40],
-        category: "Men",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 1, // Available quantity for size S
-            M: 10, // Available quantity for size M
-            L: 20, // Out of stock for size L
-            XL: 30 // Available quantity for size XL
-        },
-        date: 1716655245448,
-        bestseller: false
-    },
-    {
-        _id: "aaabo",
-        name: "Men Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 270,
-        image: [p_img41],
-        category: "Men",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716656345448,
-        bestseller: false
-    },
-    {
-        _id: "aaabp",
-        name: "Boy Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 300,
-        image: [p_img42],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 0, // Available quantity for size S
-            M: 0, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 0 // Available quantity for size XL
-        },
-        date: 1716657445448,
-        bestseller: true
-    },
-    {
-        _id: "aaabq",
-        name: "Kid Tapered Slim Fit Trouser",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 280,
-        image: [p_img43],
-        category: "Kids",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 1, // Available quantity for size S
-            M: 10, // Available quantity for size M
-            L: 20, // Out of stock for size L
-            XL: 30 // Available quantity for size XL
-        },
-        date: 1716658545448,
-        bestseller: true
-    },
-    {
-        _id: "aaabr",
-        name: "Women Zip-Front Relaxed Fit Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 310,
-        image: [p_img44],
-        category: "Women",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 1, // Available quantity for size S
-            M: 10, // Available quantity for size M
-            L: 20, // Out of stock for size L
-            XL: 30 // Available quantity for size XL
-        },
-        date: 1716659645448,
-        bestseller: true
-    },
-    {
-        _id: "aaabs",
-        name: "Men Slim Fit Relaxed Denim Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 290,
-        image: [p_img45],
-        category: "Men",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 1, // Available quantity for size S
-            M: 10, // Available quantity for size M
-            L: 20, // Out of stock for size L
-            XL: 30 // Available quantity for size XL
-        },
-        date: 1716660745448,
-        bestseller: true
-    },
-    {
-        _id: "aaabt",
-        name: "Men Slim Fit Relaxed Denim Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 320,
-        image: [p_img46],
-        category: "Men",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 1, // Available quantity for size S
-            M: 10, // Available quantity for size M
-            L: 20, // Out of stock for size L
-            XL: 30 // Available quantity for size XL
-        },
-        date: 1716661845448,
-        bestseller: true
-    },
-    {
-        _id: "aaabu",
-        name: "Kid Tapered Slim Fit Trouser",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 300,
-        image: [p_img47],
-        category: "Kids",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 1, // Available quantity for size S
-            M: 10, // Available quantity for size M
-            L: 20, // Out of stock for size L
-            XL: 30 // Available quantity for size XL
-        },
-        date: 1716662945448,
-        bestseller: false
-    },
-    {
-        _id: "aaabv",
-        name: "Men Slim Fit Relaxed Denim Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 330,
-        image: [p_img48],
-        category: "Men",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 1, // Available quantity for size S
-            M: 10, // Available quantity for size M
-            L: 20, // Out of stock for size L
-            XL: 30 // Available quantity for size XL
-        },
-        date: 1716664045448,
-        bestseller: true
-    },
-    {
-        _id: "aaabw",
-        name: "Kid Tapered Slim Fit Trouser",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 310,
-        image: [p_img49],
-        category: "Kids",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 1, // Available quantity for size S
-            M: 10, // Available quantity for size M
-            L: 20, // Out of stock for size L
-            XL: 30 // Available quantity for size XL
-        },
-        date: 1716665145448,
-        bestseller: true
-    },
-    {
-        _id: "aaabx",
-        name: "Kid Tapered Slim Fit Trouser",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 340,
-        image: [p_img50],
-        category: "Kids",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 1, // Available quantity for size S
-            M: 10, // Available quantity for size M
-            L: 20, // Out of stock for size L
-            XL: 30 // Available quantity for size XL
-        },
-        date: 1716666245448, bestseller: false
-    },
-    {
-        _id: "aaaby",
-        name: "Women Zip-Front Relaxed Fit Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 320,
-        image: [p_img51],
-        category: "Women",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716667345448,
-        bestseller: true
-    },
-    {
-        _id: "aaabz",
-        name: "Men Slim Fit Relaxed Denim Jacket",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 350,
-        image: [p_img52],
-        category: "Men",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5, // Available quantity for size S
-            M: 3, // Available quantity for size M
-            L: 0, // Out of stock for size L
-            XL: 2 // Available quantity for size XL
-        },
-        date: 1716668445448,
-        bestseller: true
-    },
-
-    {
-        _id: "PROD_001",
-        name: "Girls Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 170,
-        image: [
-            "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2lybHMlMjB0b3B8ZW58MHx8MHx8fDA%3D"
-        ],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 10,
-            M: 15,
-            L: 12,
-            XL: 8
-        },
-        date: 1716628845448,
-        bestseller: false,
-        discount: 20
-    },
-    {
-        _id: "PROD_002",
-        name: "Men Tapered Fit Flat-Front Trousers",
-        description: "A stylish pair of trousers designed for comfort and elegance.",
-        price: 150,
-        image: [
-            "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWVuJTIwdHJvdXNlcnN8ZW58MHx8MHx8fDA%3D"
-        ],
-        category: "Men",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5,
-            M: 3,
-            L: 0,
-            XL: 2
-        },
-        date: 1716629945448,
-        bestseller: false,
-    },
-    {
-        _id: "PROD_003",
-        name: "Boy Round Neck Pure Cotton T-shirt",
-        description: "A comfortable cotton t-shirt perfect for everyday wear.",
-        price: 180,
-        image: [
-            "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Ym95JTIwdCUyMHNoaXJ0fGVufDB8fDB8fHww"
-        ],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5,
-            M: 3,
-            L: 0,
-            XL: 2
-        },
-        date: 1716631045448,
-        bestseller: false,
-        discount: 20
-    },
-    {
-        _id: "PROD_004",
-        name: "Boy Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, breathable t-shirt for boys.",
-        price: 160,
-        image: [
-            "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGJveSUyMHQlMjBzaGlydHxlbnwwfHwwfHx8MA%3D%3D"
-        ],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5,
-            M: 3,
-            L: 0,
-            XL: 2
-        },
-        date: 1716632145448,
-        bestseller: false,
-    },
-    {
-        _id: "PROD_005",
-        name: "Women Palazzo Pants with Waist Belt",
-        description: "Stylish palazzo pants that offer comfort and elegance.",
-        price: 190,
-        image: [
-            "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d29tZW4lMjBwYWxhenpvfGVufDB8fDB8fHww"
-        ],
-        category: "Women",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5,
-            M: 3,
-            L: 0,
-            XL: 2
-        },
-        date: 1716633245448,
-        bestseller: false,
-    },
-    {
-        _id: "PROD_006",
-        name: "Women Zip-Front Relaxed Fit Jacket",
-        description: "A cozy jacket perfect for chilly days.",
-        price: 170,
-        image: [
-            "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d29tZW4lMjBqYWNrZXR8ZW58MHx8MHx8fDA%3D"
-        ],
-        category: "Women",
-        subCategory: "WinterWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5,
-            M: 3,
-            L: 0,
-            XL: 2
-        },
-        date: 1716634345448,
-        bestseller: false,
-        discount: 20
-    },
-    {
-        _id: "PROD_007",
-        name: "Women Palazzo Pants with Waist Belt",
-        description: "Elegant palazzo pants with a stylish waist belt.",
-        price: 200,
-        image: [
-            "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHdvbWVuJTIwcGFsYXp6b3xlbnwwfHwwfHx8MA%3D%3D"
-        ],
-        category: "Women",
-        subCategory: "BottomWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5,
-            M: 3,
-            L: 0,
-            XL: 2
-        },
-        date: 1716635445448,
-        bestseller: false,
-        discount: 20
-    },
-    {
-        _id: "PROD_008",
-        name: "Boy Round Neck Pure Cotton T-shirt",
-        description: "A classic round neck t-shirt for boys.",
-        price: 180,
-        image: [
-            "https://images.unsplash.com/photo-1622290319146-7b63df48a635?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGJveSUyMHQlMjBzaGlydHxlbnwwfHwwfHx8MA%3D%3D"
-        ],
-        category: "Kids",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L", "XL"],
-        sizeQuantities: {
-            S: 5,
-            M: 3,
-            L: 0,
-            XL: 2
-        },
-        date: 1716636545448,
-        bestseller: false,
-        discount: 20
-    },
-    // {
-    //     _id: "PROD_009",
-    //     name: "Girls Floral Print Dress",
-    //     description: "A beautiful floral dress perfect for summer.",
-    //     price: 220,
-    //     image: [
-    //         "https://images.unsplash.com/photo-1524920333556-c87aa8fccbf0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHMlMjBkcmVzc3xlbnwwfHwwfHx8MA%3D%3D"
-    //     ],
-    //     category: "Kids",
-    //     subCategory: "TopWear",
-    //     sizes: ["S", "M", "L"],
-    //     sizeQuantities: {
-    //         S: 8,
-    //         M: 10,
-    //         L: 6
-    //     },
-    //     date: 1716637645448,
-    //     bestseller: false,
-    //     discount: 20
-    // },
-
-    {
-        _id: "PROD_011",
-        name: "Women Round Neck Cotton Top",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 100,
-        image: [
-            "https://images.unsplash.com/photo-1624206112918-f140f087f9b5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHdvbWVuJTIwdG9wfGVufDB8fDB8fHww"
-        ],
-        category: "Women",
-        subCategory: "TopWear",
-        sizes: ["S", "M", "L"],
-        sizeQuantities: {
-            S: 5,
-            M: 3,
-            L: 0
-        },
-        date: 1716634345448,
-        bestseller: true,
-        discount: 10
-    },
-    {
-        _id: "PROD_012",
-        name: "Men Round Neck Pure Cotton T-shirt",
-        description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
-        price: 200,
-        image: [
-            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVuJTIwdCUyMHNoaXJ0fGVufDB8fDB8fHww",
-            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWVuJTIwdCUyMHNoaXJ0fGVufDB8fDB8fHww",
-            "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1lbiUyMHQlMjBzaGlydHxlbnwwfHwwfHx8MA%3D%3D",
-            "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1lbiUyMHQlMjBzaGlydHxlbnwwfHwwfHx8MA%3D%3D"
-        ],
-        category: "Men",
-        subCategory: "TopWear",
-        sizes: ["M", "L", "XL"],
-        sizeQuantities: {
-            M: 8,
-            L: 12,
-            XL: 6
-        },
-        date: 1716621345448,
-        bestseller: true,
-        discount: 50
     }
-
 ]
