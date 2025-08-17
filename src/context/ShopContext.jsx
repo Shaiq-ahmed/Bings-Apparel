@@ -10,6 +10,7 @@ const ShopContextProvider = (props) => {
     const currency = "$";
     const delivery_fee = 10;
     const [cartItems, setCartItems] = useState({});
+    const [wishlistItems, setWishlistItems] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(true)
 
     // Other state and functions...
