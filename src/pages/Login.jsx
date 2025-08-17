@@ -4,8 +4,8 @@ import { useState } from "react"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { motion } from "framer-motion"
-import {Link} from "react-router-dom"
-import LoginPlaceholder from "../assets/assets/frontend_assets/LoginPlaceholder.png"
+import { Link } from "react-router-dom"
+import { Eye, EyeOff } from 'lucide-react'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Email is required"),
@@ -14,6 +14,7 @@ const loginSchema = Yup.object().shape({
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const formik = useFormik({
     initialValues: {
@@ -32,124 +33,133 @@ export default function Login() {
   })
 
   return (
-    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      <img
-        src={LoginPlaceholder}
-        alt="Login background"
-        // layout="fill"
-        // objectFit="cover"
-        className="absolute inset-0 w-full h-full object-cover opacity-50 sm:opacity-30"
-      />
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white/80 backdrop-blur-md p-8 shadow-xl rounded-lg w-full"
-          >
-            <div className="mb-8 text-center">
-              <h2 className="text-3xl font-bold text-gray-900">Welcome Back</h2>
-              <p className="mt-2 text-sm text-gray-600">
-                Please log in to your account
-              </p>
-            </div>
-            <form onSubmit={formik.handleSubmit} className="space-y-6">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="space-y-8"
+        >
+          {/* Header */}
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight">
+              Welcome back
+            </h2>
+            <p className="mt-4 text-lg text-gray-600 font-light">
+              Sign in to your account
+            </p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={formik.handleSubmit} className="space-y-6">
+            <div className="space-y-5">
+              {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Email
-                </label>
                 <input
                   id="email"
                   type="email"
                   {...formik.getFieldProps("email")}
-                  className={`mt-1 block w-full rounded-md border ${
+                  placeholder="Email"
+                  className={`w-full px-4 py-4 text-lg border-0 border-b-2 ${
                     formik.touched.email && formik.errors.email
                       ? "border-red-500"
-                      : "border-gray-300"
-                  } px-3 py-2 shadow-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black bg-white/50`}
+                      : "border-gray-200 focus:border-gray-900"
+                  } bg-transparent focus:outline-none focus:ring-0 transition-colors duration-300 placeholder-gray-400`}
                 />
                 {formik.touched.email && formik.errors.email && (
                   <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-1 text-sm text-red-500"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="mt-2 text-sm text-red-500"
                   >
                     {formik.errors.email}
                   </motion.p>
                 )}
               </div>
 
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  Password
-                </label>
+              {/* Password */}
+              <div className="relative">
                 <input
                   id="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   {...formik.getFieldProps("password")}
-                  className={`mt-1 block w-full rounded-md border ${
+                  placeholder="Password"
+                  className={`w-full px-4 py-4 pr-12 text-lg border-0 border-b-2 ${
                     formik.touched.password && formik.errors.password
                       ? "border-red-500"
-                      : "border-gray-300"
-                  } px-3 py-2 shadow-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black bg-white/50`}
+                      : "border-gray-200 focus:border-gray-900"
+                  } bg-transparent focus:outline-none focus:ring-0 transition-colors duration-300 placeholder-gray-400`}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
                 {formik.touched.password && formik.errors.password && (
                   <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-1 text-sm text-red-500"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="mt-2 text-sm text-red-500"
                   >
                     {formik.errors.password}
                   </motion.p>
                 )}
               </div>
+            </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    id="rememberMe"
-                    type="checkbox"
-                    {...formik.getFieldProps("rememberMe")}
-                    className="h-4 w-4 rounded border-gray-300 text-black focus:ring-black"
-                  />
-                  <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700">
-                    Remember me
-                  </label>
+            {/* Remember me and forgot password */}
+            <div className="flex items-center justify-between">
+              <label className="flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  {...formik.getFieldProps("rememberMe")}
+                  className="sr-only"
+                />
+                <div className={`w-5 h-5 border-2 border-gray-300 rounded transition-colors duration-200 flex items-center justify-center ${
+                  formik.values.rememberMe ? 'bg-gray-900 border-gray-900' : 'bg-white'
+                }`}>
+                  {formik.values.rememberMe && (
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  )}
                 </div>
-                <Link
-                  to="/forgot-password"
-                  className="text-sm font-medium text-gray-700 hover:text-gray-900"
-                >
-                  Forgot password?
-                </Link>
-              </div>
-
-              <motion.div
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+                <span className="ml-3 text-gray-700 font-medium">Remember me</span>
+              </label>
+              <Link
+                to="/forgot-password"
+                className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
               >
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full rounded-md bg-black py-2 px-4 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
-                >
-                  {isLoading ? "Signing in..." : "Sign in"}
-                </button>
-              </motion.div>
+                Forgot password?
+              </Link>
+            </div>
 
-              <p className="text-center text-sm text-gray-600">
-                Don't have an account?{" "}
-                <Link
-                  to="/signup"
-                  className="font-medium text-gray-700 hover:text-gray-900"
-                >
-                  Create account
-                </Link>
-              </p>
-            </form>
-          </motion.div>
-        </div>
+            {/* Submit button */}
+            <motion.button
+              type="submit"
+              disabled={isLoading}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              className="w-full bg-black text-white py-4 px-6 text-lg font-medium rounded-full hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-none hover:shadow-lg"
+            >
+              {isLoading ? "Signing in..." : "Sign in"}
+            </motion.button>
+
+            {/* Sign up link */}
+            <p className="text-center text-gray-600">
+              Don't have an account?{" "}
+              <Link
+                to="/signup"
+                className="font-medium text-gray-900 hover:text-gray-700 transition-colors"
+              >
+                Create account
+              </Link>
+            </p>
+          </form>
+        </motion.div>
       </div>
     </div>
   )
