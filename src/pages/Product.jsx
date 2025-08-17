@@ -234,9 +234,6 @@ const Product = () => {
 
       {/* Related Products */}
       <div className='w-full mt-20 sm:mt-32 mb-5'>
-        <div className='text-center mb-8'>
-          <Title text1={'Related'} text2={'Products'} />
-        </div>
         <div className='-mx-4 sm:-mx-[5vw] md:-mx-[7vw] lg:-mx-[5vw]'>
           <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
         </div>
@@ -246,4 +243,3 @@ const Product = () => {
 }
 
 export default Product
-
