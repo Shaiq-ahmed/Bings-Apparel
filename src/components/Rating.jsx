@@ -37,9 +37,9 @@ const generateFakeRatings = (num) => {
     return ratings.sort((a, b) => b.createdAt - a.createdAt);
 };
 
-const fakeRatings = generateFakeRatings(25);
-
 const Rating = () => {
+    // Generate fake ratings inside component to avoid module-level execution issues
+    const fakeRatings = React.useMemo(() => generateFakeRatings(25), []);
     const [ratings, setRatings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
