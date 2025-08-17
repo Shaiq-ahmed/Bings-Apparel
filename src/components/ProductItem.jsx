@@ -129,7 +129,7 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
                                     </Button>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                    <p>{isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}</p>
+                                    <p>{isInWishlist(id) ? 'Remove from Wishlist' : 'Add to Wishlist'}</p>
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
