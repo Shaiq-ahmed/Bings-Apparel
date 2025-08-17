@@ -128,6 +128,9 @@ const ShopContextProvider = (props) => {
         updateCartItems,
         calculateCartTotals,
         cartItems,
+        wishlistItems,
+        addToWishlist,
+        isInWishlist,
         setIsLoggedIn,
         isLoggedIn,
         logout
