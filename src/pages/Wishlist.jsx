@@ -27,8 +27,8 @@ export default function Wishlist() {
     }
 
     const handleAddToCart = (item) => {
-        console.log(`Added ${item.name} to cart`)
-        // Implement add to cart logic here
+        // Redirect to product page instead of adding directly to cart
+        window.location.href = `/product/${item.id}`
     }
 
     const sortItems = (items) => {
