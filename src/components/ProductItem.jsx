@@ -125,7 +125,7 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
                                         className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/95 backdrop-blur-sm hover:bg-white transition-all duration-300 border-0 shadow-lg"
                                         onClick={handleAddToWishlist}
                                     >
-                                        <Heart className={`h-4 w-4 ${isInWishlist ? 'fill-red-500 text-red-500' : 'text-gray-700'}`} />
+                                        <Heart className={`h-4 w-4 ${isInWishlist(id) ? 'fill-red-500 text-red-500' : 'text-gray-700'}`} />
                                     </Button>
                                 </TooltipTrigger>
                                 <TooltipContent>
