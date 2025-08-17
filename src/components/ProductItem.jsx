@@ -17,7 +17,7 @@ const truncateName = (name, maxLength = 25) => {
 }
 
 const ProductItem = ({ id, image, name, price, sizeQuantities, discount, description, rating = 4.5 }) => {
-    const { currency, addToCart, addToWishlist, isInWishlist = true } = useContext(ShopContext)
+    const { currency, addToCart, addToWishlist, isInWishlist } = useContext(ShopContext)
     const navigate = useNavigate()
     const [isHovered, setIsHovered] = useState(false)
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
