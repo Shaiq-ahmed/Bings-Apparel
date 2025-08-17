@@ -12,12 +12,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { isProductInStock } from '../utils/checkStock'
 import { LazyImage } from './ui/loading'
 
-const truncateName = (name, maxLength = 30) => {
+const truncateName = (name, maxLength = 25) => {
     return name.length > maxLength ? `${name.slice(0, maxLength)}...` : name
 }
 
 const ProductItem = ({ id, image, name, price, sizeQuantities, discount, description, rating = 4.5 }) => {
-    const { currency, addToCart, addToWishlist, isInWishlist = true } = useContext(ShopContext)
+    const { currency, addToCart, addToWishlist, isInWishlist } = useContext(ShopContext)
     const navigate = useNavigate()
     const [isHovered, setIsHovered] = useState(false)
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -48,7 +48,7 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-            className="w-full group"
+            className="w-full max-w-sm mx-auto group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -125,11 +125,11 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
                                         className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/95 backdrop-blur-sm hover:bg-white transition-all duration-300 border-0 shadow-lg"
                                         onClick={handleAddToWishlist}
                                     >
-                                        <Heart className={`h-4 w-4 ${isInWishlist ? 'fill-red-500 text-red-500' : 'text-gray-700'}`} />
+                                        <Heart className={`h-4 w-4 ${isInWishlist(id) ? 'fill-red-500 text-red-500' : 'text-gray-700'}`} />
                                     </Button>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                    <p>{isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}</p>
+                                    <p>{isInWishlist(id) ? 'Remove from Wishlist' : 'Add to Wishlist'}</p>
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
@@ -146,13 +146,13 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
                 <CardFooter className="flex flex-col items-start p-6 space-y-4 bg-white">
                     {/* Product name with Apple typography */}
                     <Link to={`/product/${id}`} className="block w-full">
-                        <h3 className="font-medium text-gray-900 text-base leading-snug hover:text-blue-600 transition-colors duration-300 tracking-[-0.01em]">
-                            {truncateName(name, 35)}
+                        <h3 className="font-medium text-gray-900 text-base leading-snug hover:text-blue-600 transition-colors duration-300 tracking-[-0.01em] h-12 flex items-center">
+                            {truncateName(name, 25)}
                         </h3>
                     </Link>
 
                     {/* Price with Apple styling */}
-                    <div className="flex items-baseline space-x-2 w-full">
+                    <div className="flex items-baseline space-x-2 w-full h-8">
                         <span className="text-xl font-semibold text-gray-900 tracking-[-0.02em]">
                             {currency}{discountedPrice}
                         </span>

@@ -7,6 +7,9 @@ import NewsLetter from '../components/NewsLetter'
 import FeaturedProductsCarousel from '@/components/FeaturedProductCarousel'
 import VideoSection from '../components/VideoSection'
 import TestimonialsSection from '../components/TestimonialsSection'
+import FeatureShowcase from '../components/FeatureShowcase'
+import StatsSection from '../components/StatsSection'
+import CollectionShowcase from '../components/CollectionShowcase'
 import { ShopContext } from '@/context/ShopContext'
 
 const Home = ({ searchVisible }) => {
@@ -34,13 +37,28 @@ const Home = ({ searchVisible }) => {
           </div>
         </section>
         
+        {/* Collection Showcase - Premium brand-style */}
+        <section>
+          <CollectionShowcase />
+        </section>
+
         {/* Best Seller with Apple-style generous padding */}
         <section className='px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
           <div className='py-16 sm:py-20'>
             <BestSeller/>
           </div>
         </section>
-        
+
+        {/* Feature Showcase - Nike/Adidas inspired */}
+        <section className='bg-gray-50'>
+          <FeatureShowcase />
+        </section>
+
+        {/* Stats Section - Premium brand treatment */}
+        <section>
+          <StatsSection />
+        </section>
+
         {/* Video Section - Apple-style full width treatment */}
         <section className='bg-black'>
           <VideoSection />

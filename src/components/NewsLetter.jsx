@@ -28,18 +28,18 @@ const NewsLetter = () => {
     }
 
     return (
-        <motion.section 
+        <motion.section
             ref={containerRef}
             style={{ y, opacity }}
-            className="w-full py-20 bg-gray-50"
+            className="w-full py-6 bg-gray-50"
         >
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="w-full px-2.5 text-center">
                 {/* Apple-style minimalist header */}
                 <motion.div 
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="mb-12"
+                    className="mb-6"
                 >
                     <h2 className="text-4xl md:text-6xl font-semibold text-gray-900 mb-6 tracking-tight">
                         Stay in the know

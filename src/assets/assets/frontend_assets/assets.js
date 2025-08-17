@@ -310,12 +310,12 @@ export const products = [
     },
     {
         _id: "AESTHETIC_010",
-        name: "Kids Comfortable Joggers",
-        description: "Cozy joggers perfect for play and rest. Made from organic cotton blend with adjustable waistband.",
-        price: 45,
+        name: "Premium Kids Sneakers",
+        description: "Comfortable and stylish sneakers designed for active kids. Breathable mesh upper with cushioned sole for all-day comfort.",
+        price: 65,
         image: [
-            "https://images.unsplash.com/photo-1586328409194-5e3fef6ca2df?w=600&h=800&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1561789934-aae5a783899c?w=600&h=800&fit=crop&q=80"
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5a?w=600&h=800&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&h=800&fit=crop&q=80"
         ],
         category: "Kids",
         subCategory: "BottomWear",

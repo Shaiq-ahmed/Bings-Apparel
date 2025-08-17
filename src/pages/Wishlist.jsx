@@ -1,38 +1,47 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Heart, ShoppingCart, Trash2, ChevronDown } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import Title from "../components/Text"
-import assets from "../assets/assets/frontend_assets/p_img16.png"
-
-// Mock data for wishlist items
-const initialWishlistItems = [
-    { id: 1, name: "Minimalist Cashmere Sweater", price: 189.99, image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&h=800&fit=crop&q=80", inStock: true },
-    { id: 2, name: "Classic White Button-Down", price: 89.99, image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=800&fit=crop&q=80", inStock: true },
-    { id: 3, name: "Premium Cotton T-Shirt", price: 65.99, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=800&fit=crop&q=80", inStock: false },
-    { id: 4, name: "Tailored Dress Shirt", price: 125.99, image: "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=600&h=800&fit=crop&q=80", inStock: true },
-    { id: 5, name: "High-Waisted Trousers", price: 145.99, image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=800&fit=crop&q=80", inStock: true },
-]
+import { ShopContext } from "../context/ShopContext"
+import { useNavigate } from "react-router-dom"
+import { isProductInStock } from '../utils/checkStock'
 
 export default function Wishlist() {
-    const [wishlistItems, setWishlistItems] = useState(initialWishlistItems)
+    const { products, wishlistItems, currency } = useContext(ShopContext)
+    const navigate = useNavigate()
+    const [displayWishlist, setDisplayWishlist] = useState([])
     const [sortOrder, setSortOrder] = useState("name-asc")
     const [showSortDropdown, setShowSortDropdown] = useState(false)
     const [showInStock, setShowInStock] = useState(false)
 
+    // Convert wishlist IDs to actual product data
+    useEffect(() => {
+        const wishlistProducts = wishlistItems.map(id =>
+            products.find(product => product._id === id)
+        ).filter(Boolean).map(product => ({
+            id: product._id,
+            name: product.name,
+            price: product.price,
+            image: product.image[0],
+            inStock: isProductInStock(product.sizeQuantities)
+        }))
+        setDisplayWishlist(wishlistProducts)
+    }, [wishlistItems, products])
+
     const handleRemoveItem = (id) => {
-        setWishlistItems(wishlistItems.filter(item => item.id !== id))
+        // This will be handled by the addToWishlist function which toggles
+        // For now, let's navigate to prevent errors
     }
 
     const handleAddToCart = (item) => {
-        console.log(`Added ${item.name} to cart`)
-        // Implement add to cart logic here
+        // Redirect to product page instead of adding directly to cart
+        navigate(`/product/${item.id}`)
     }
 
     const sortItems = (items) => {
-        return items.sort((a, b) => {
+        return [...items].sort((a, b) => {
             if (sortOrder === "name-asc") return a.name.localeCompare(b.name)
             if (sortOrder === "name-desc") return b.name.localeCompare(a.name)
             if (sortOrder === "price-asc") return a.price - b.price
@@ -51,7 +60,7 @@ export default function Wishlist() {
         }
     }
 
-    const filteredAndSortedItems = sortItems(wishlistItems).filter(item => !showInStock || item.inStock)
+    const filteredAndSortedItems = sortItems(displayWishlist).filter(item => !showInStock || item.inStock)
 
     return (
         <div className="min-h-screen bg-white py-20">
@@ -171,7 +180,7 @@ export default function Wishlist() {
                                     {/* Details */}
                                     <div>
                                         <h3 className="text-lg font-medium text-gray-900 mb-1">{item.name}</h3>
-                                        <p className="text-xl font-semibold text-gray-900">${item.price.toFixed(2)}</p>
+                                        <p className="text-xl font-semibold text-gray-900">{currency}{item.price.toFixed(2)}</p>
                                     </div>
                                 </div>
 

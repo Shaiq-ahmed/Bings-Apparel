@@ -80,24 +80,26 @@ export default function Login() {
 
               {/* Password */}
               <div className="relative">
-                <input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  {...formik.getFieldProps("password")}
-                  placeholder="Password"
-                  className={`w-full px-4 py-4 pr-12 text-lg border-0 border-b-2 ${
-                    formik.touched.password && formik.errors.password
-                      ? "border-red-500"
-                      : "border-gray-200 focus:border-gray-900"
-                  } bg-transparent focus:outline-none focus:ring-0 transition-colors duration-300 placeholder-gray-400`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition-colors"
-                >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
+                <div className="relative">
+                  <input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    {...formik.getFieldProps("password")}
+                    placeholder="Password"
+                    className={`w-full px-4 py-4 pr-12 text-lg border-0 border-b-2 ${
+                      formik.touched.password && formik.errors.password
+                        ? "border-red-500"
+                        : "border-gray-200 focus:border-gray-900"
+                    } bg-transparent focus:outline-none focus:ring-0 transition-colors duration-300 placeholder-gray-400`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition-colors z-10"
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
                 {formik.touched.password && formik.errors.password && (
                   <motion.p
                     initial={{ opacity: 0, height: 0 }}
