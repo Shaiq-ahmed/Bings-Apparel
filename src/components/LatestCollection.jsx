@@ -89,18 +89,18 @@ const LatestCollection = () => {
                                     className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 lg:gap-12"
                                 >
                                     {filteredProducts.map((product, index) => (
-                                        <motion.div 
+                                        <motion.div
                                             key={product._id}
-                                            initial={{ opacity: 0, y: 20 }}
+                                            initial={{ opacity: 0, y: 30 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            transition={{ 
-                                                duration: 0.6, 
-                                                delay: index * 0.1,
-                                                ease: "easeOut"
+                                            transition={{
+                                                duration: 0.8,
+                                                delay: index * 0.15,
+                                                ease: [0.25, 0.1, 0.25, 1]
                                             }}
-                                            whileHover={{ 
-                                                y: -8,
-                                                transition: { duration: 0.3, ease: "easeOut" }
+                                            whileHover={{
+                                                y: -12,
+                                                transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }
                                             }}
                                             className="group"
                                         >
