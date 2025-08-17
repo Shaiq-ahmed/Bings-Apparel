@@ -27,7 +27,7 @@ const generateFakeRatings = (num) => {
             rating: faker.number.int({ min: 3, max: 5 }) > 3 ? 5 : faker.number.int({ min: 1, max: 5 }),
             review: faker.helpers.arrayElement(reviewTemplates),
             createdAt: faker.date.past(),
-            verified: faker.datatype.boolean(),
+            verified: Math.random() > 0.3,
             helpful: faker.number.int({ min: 0, max: 15 }),
             size: faker.helpers.arrayElement(['XS', 'S', 'M', 'L', 'XL']),
             color: faker.helpers.arrayElement(['Black', 'White', 'Navy', 'Gray', 'Beige'])
