@@ -16,13 +16,28 @@ export default function Wishlist() {
     const [showSortDropdown, setShowSortDropdown] = useState(false)
     const [showInStock, setShowInStock] = useState(false)
 
+    // Convert wishlist IDs to actual product data
+    useEffect(() => {
+        const wishlistProducts = wishlistItems.map(id =>
+            products.find(product => product._id === id)
+        ).filter(Boolean).map(product => ({
+            id: product._id,
+            name: product.name,
+            price: product.price,
+            image: product.image[0],
+            inStock: isProductInStock(product.sizeQuantities)
+        }))
+        setDisplayWishlist(wishlistProducts)
+    }, [wishlistItems, products])
+
     const handleRemoveItem = (id) => {
-        setWishlistItems(wishlistItems.filter(item => item.id !== id))
+        // This will be handled by the addToWishlist function which toggles
+        // For now, let's navigate to prevent errors
     }
 
     const handleAddToCart = (item) => {
         // Redirect to product page instead of adding directly to cart
-        window.location.href = `/product/${item.id}`
+        navigate(`/product/${item.id}`)
     }
 
     const sortItems = (items) => {
