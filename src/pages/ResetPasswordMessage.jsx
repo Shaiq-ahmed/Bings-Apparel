@@ -44,8 +44,8 @@ export default function ResetPasswordMessage() {
                             </p>
                             <p className="text-gray-700 text-base leading-relaxed">
                                 If you are unable to access your account, please contact our support team at{' '}
-                                <a href="mailto:support@bingsdrip.com" className="text-black hover:underline">
-                                    support@bingsdrip.com
+                                <a href="mailto:support@shopofsa.com" className="text-black hover:underline">
+                                    support@shopofsa.com
                                 </a>.
                             </p>
                         </div>
@@ -66,4 +66,3 @@ export default function ResetPasswordMessage() {
         </div>
     )
 }
-
