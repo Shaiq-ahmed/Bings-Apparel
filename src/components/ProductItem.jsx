@@ -26,11 +26,7 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
     const isInStock = isProductInStock(sizeQuantities)
 
     const handleAddToCart = () => {
-        if (isInStock) {
-            addToCart(id)
-        } else {
-            navigate(`/product/${id}`)
-        }
+        navigate(`/product/${id}`)
     }
 
     const handleAddToWishlist = () => {
@@ -165,18 +161,12 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
 
                     {/* Minimal action button - Apple style */}
                     <Button
-                        variant={isInStock ? "default" : "secondary"}
+                        variant="default"
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full py-3 text-sm font-medium transition-all duration-300 border-0 shadow-sm"
                         onClick={handleAddToCart}
                     >
-                        {isInStock ? (
-                            <>
-                                <ShoppingCart className="mr-2 h-4 w-4" /> 
-                                Add to Bag
-                            </>
-                        ) : (
-                            'View Details'
-                        )}
+                        <Eye className="mr-2 h-4 w-4" />
+                        View Details
                     </Button>
                 </CardFooter>
             </Card>
