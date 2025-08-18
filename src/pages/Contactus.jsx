@@ -180,13 +180,13 @@ const Contactus = () => {
                     required 
                   />
                 </div>
-                <motion.div className="pt-4">
-                  <Button 
+                <div className="pt-4">
+                  <motion.button
                     type="submit"
                     disabled={isSubmitted}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-black text-white hover:bg-gray-800 py-4 px-6 text-lg font-medium rounded-full disabled:opacity-50 transition-all duration-300 shadow-none hover:shadow-lg"
+                    className="w-full bg-black text-white hover:bg-gray-800 py-4 px-6 text-lg font-medium rounded-full disabled:opacity-50 transition-all duration-300 shadow-none hover:shadow-lg inline-flex items-center justify-center gap-2"
                   >
                     {isSubmitted ? (
                       <>
@@ -199,8 +199,8 @@ const Contactus = () => {
                         Send Message
                       </>
                     )}
-                  </Button>
-                </motion.div>
+                  </motion.button>
+                </div>
               </form>
             </motion.div>
 
