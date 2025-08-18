@@ -137,7 +137,7 @@ const Navbar = () => {
                                 </nav>
                             </SheetContent>
                         </Sheet>
-                        <Link to='/' className="text-xl md:text-2xl font-bold">Bings Drip</Link>
+                        <Link to='/' className="text-xl md:text-2xl font-bold">Shop of SA</Link>
                     </div>
 
                     {/* Desktop Menu */}
@@ -202,4 +202,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-
