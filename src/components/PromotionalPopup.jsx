@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Gift, Percent, Zap, ShoppingBag } from 'lucide-react';
 import { Button } from './ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const promotionalOffers = [
     {
@@ -65,34 +66,31 @@ const PromotionalPopup = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [currentOffer, setCurrentOffer] = useState(null);
     const [hasShown, setHasShown] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // Check if popup has been shown in this session
-        const popupShown = sessionStorage.getItem('promotionalPopupShown');
-        
-        if (!popupShown && !hasShown) {
+        // Check if popup has been shown in this browser session (persist across page reloads)
+        const popupShown = localStorage.getItem('promotionalPopupShown');
+        const popupDate = localStorage.getItem('promotionalPopupDate');
+        const today = new Date().toDateString();
+
+        // Show popup only once per day
+        if ((!popupShown || popupDate !== today) && !hasShown) {
             // Show popup after 2 seconds
             const timer = setTimeout(() => {
                 const randomOffer = promotionalOffers[Math.floor(Math.random() * promotionalOffers.length)];
                 setCurrentOffer(randomOffer);
                 setIsVisible(true);
                 setHasShown(true);
-                sessionStorage.setItem('promotionalPopupShown', 'true');
+                localStorage.setItem('promotionalPopupShown', 'true');
+                localStorage.setItem('promotionalPopupDate', today);
             }, 2000);
 
             return () => clearTimeout(timer);
         }
     }, [hasShown]);
 
-    // Show random popup on page refresh (only once per session)
-    useEffect(() => {
-        const handleBeforeUnload = () => {
-            sessionStorage.removeItem('promotionalPopupShown');
-        };
-
-        window.addEventListener('beforeunload', handleBeforeUnload);
-        return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-    }, []);
+    // No need to remove on page unload - we want it to persist across the session
 
     const closePopup = () => {
         setIsVisible(false);
@@ -101,8 +99,8 @@ const PromotionalPopup = () => {
     const handleOfferAction = () => {
         // Navigate to collection or apply discount code
         setIsVisible(false);
-        // In a real app, you might navigate to a specific page or apply the discount
-        window.location.href = '/collection';
+        // Use React Router navigation instead of window.location
+        navigate('/collection');
     };
 
     if (!currentOffer) return null;
