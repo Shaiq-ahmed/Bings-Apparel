@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Eye, EyeOff } from 'lucide-react'
+import { ShopContext } from '../context/ShopContext'
 
 const registerSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -22,6 +23,8 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const { login } = useContext(ShopContext)
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -35,8 +38,15 @@ export default function SignUp() {
       setIsLoading(true)
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000))
-      console.log(values)
+
+      const userData = {
+        name: values.name,
+        email: values.email
+      };
+
+      login(userData);
       setIsLoading(false)
+      navigate('/')
     },
   })
 
