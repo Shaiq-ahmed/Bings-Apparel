@@ -15,13 +15,13 @@ import Title from '../components/Text'
 
 const Product = () => {
   const { productId } = useParams()
-  const { products, currency, addToCart } = useContext(ShopContext)
+  const { products, currency, addToCart, addToWishlist, isInWishlist } = useContext(ShopContext)
   const [image, setImage] = useState('')
   const [productData, setProductData] = useState(null)
   const [selectedSize, setSelectedSize] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [error, setError] = useState('')
-  const [isWishlisted, setIsWishlisted] = useState(false)
+  // Remove local wishlist state - using global context now
 
   useEffect(() => {
     const fetchProductDetails = () => {
@@ -35,7 +35,7 @@ const Product = () => {
   }, [productId, products])
 
   const handleWishlistClick = () => {
-    setIsWishlisted(prev => !prev)
+    addToWishlist(productId)
   }
 
   const handleAddToCart = () => {
@@ -207,8 +207,8 @@ const Product = () => {
               className="w-full sm:min-w-[150px]" // Full width on small screens
               onClick={handleWishlistClick}
             >
-              <Heart className={`mr-2 h-4 w-4 ${isWishlisted ? 'fill-red-500' : ''}`} />
-              {isWishlisted ? 'Wishlisted' : 'Add to Wishlist'}
+              <Heart className={`mr-2 h-4 w-4 ${isInWishlist(productId) ? 'fill-red-500' : ''}`} />
+              {isInWishlist(productId) ? 'Remove from Wishlist' : 'Add to Wishlist'}
             </Button>
           </div>
 

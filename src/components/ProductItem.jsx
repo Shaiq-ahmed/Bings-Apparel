@@ -44,14 +44,14 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-            className="w-full max-w-sm mx-auto group"
+            className="w-full max-w-xs sm:max-w-sm mx-auto group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <Card className="h-full flex flex-col overflow-hidden bg-white border-0 shadow-none hover:shadow-lg transition-all duration-700 ease-out rounded-3xl">
+            <Card className="h-full flex flex-col overflow-hidden bg-white border-0 shadow-none hover:shadow-lg transition-all duration-700 ease-out rounded-2xl sm:rounded-3xl">
                 <CardContent className="p-0 relative flex-grow">
                     {/* Apple-style image container with subtle rounded corners */}
-                    <div className="relative h-0 pb-[110%] overflow-hidden rounded-3xl bg-gray-50">
+                    <div className="relative h-0 pb-[110%] overflow-hidden rounded-2xl sm:rounded-3xl bg-gray-50">
                         <Link to={`/product/${id}`} className="block absolute inset-0">
                             <LazyImage
                                 src={image && image[currentImageIndex] ? image[currentImageIndex] : '/placeholder-image.jpg'}
@@ -98,15 +98,16 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
                         </AnimatePresence>
 
                         {/* Minimal badges - Apple style */}
-                        <div className="absolute top-4 left-4 flex flex-col space-y-2">
+                        <div className="absolute top-2 sm:top-4 left-2 sm:left-4 flex flex-col space-y-1 sm:space-y-2">
                             {discount && (
-                                <Badge className="bg-red-500/90 text-white px-3 py-1.5 text-xs font-medium rounded-full backdrop-blur-sm border-0">
+                                <Badge className="bg-red-500/90 text-white px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium rounded-full backdrop-blur-sm border-0">
                                     -{discount}%
                                 </Badge>
                             )}
                             {!isInStock && (
-                                <Badge variant="secondary" className="bg-gray-800/90 text-white px-3 py-1.5 text-xs font-medium rounded-full backdrop-blur-sm border-0">
-                                    Out of Stock
+                                <Badge variant="secondary" className="bg-gray-800/90 text-white px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium rounded-full backdrop-blur-sm border-0">
+                                    <span className="hidden sm:inline">Out of Stock</span>
+                                    <span className="sm:hidden">Out</span>
                                 </Badge>
                             )}
                         </div>
@@ -118,10 +119,10 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
                                     <Button
                                         variant="outline"
                                         size="icon"
-                                        className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/95 backdrop-blur-sm hover:bg-white transition-all duration-300 border-0 shadow-lg"
+                                        className="absolute top-2 sm:top-4 right-2 sm:right-4 w-8 sm:w-11 h-8 sm:h-11 rounded-full bg-white/95 backdrop-blur-sm hover:bg-white transition-all duration-300 border-0 shadow-lg"
                                         onClick={handleAddToWishlist}
                                     >
-                                        <Heart className={`h-4 w-4 ${isInWishlist(id) ? 'fill-red-500 text-red-500' : 'text-gray-700'}`} />
+                                        <Heart className={`h-3 sm:h-4 w-3 sm:w-4 ${isInWishlist(id) ? 'fill-red-500 text-red-500' : 'text-gray-700'}`} />
                                     </Button>
                                 </TooltipTrigger>
                                 <TooltipContent>
@@ -131,29 +132,29 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
                         </TooltipProvider>
 
                         {/* Subtle rating indicator */}
-                        <div className="absolute bottom-4 left-4 flex items-center space-x-1.5 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm">
-                            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                        <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 flex items-center space-x-1 sm:space-x-1.5 bg-white/95 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-sm">
+                            <Star className="w-2.5 sm:w-3 h-2.5 sm:h-3 fill-yellow-400 text-yellow-400" />
                             <span className="text-xs font-medium text-gray-800">{rating}</span>
                         </div>
                     </div>
                 </CardContent>
 
                 {/* Apple-style minimal footer */}
-                <CardFooter className="flex flex-col items-start p-6 space-y-4 bg-white">
+                <CardFooter className="flex flex-col items-start p-3 sm:p-6 space-y-2 sm:space-y-4 bg-white">
                     {/* Product name with Apple typography */}
                     <Link to={`/product/${id}`} className="block w-full">
-                        <h3 className="font-medium text-gray-900 text-base leading-snug hover:text-blue-600 transition-colors duration-300 tracking-[-0.01em] h-12 flex items-center">
-                            {truncateName(name, 25)}
+                        <h3 className="font-medium text-gray-900 text-xs sm:text-base leading-snug hover:text-blue-600 transition-colors duration-300 tracking-[-0.01em] h-8 sm:h-12 flex items-center">
+                            {truncateName(name, window.innerWidth < 640 ? 15 : 25)}
                         </h3>
                     </Link>
 
                     {/* Price with Apple styling */}
-                    <div className="flex items-baseline space-x-2 w-full h-8">
-                        <span className="text-xl font-semibold text-gray-900 tracking-[-0.02em]">
+                    <div className="flex items-baseline space-x-1 sm:space-x-2 w-full h-6 sm:h-8">
+                        <span className="text-sm sm:text-xl font-semibold text-gray-900 tracking-[-0.02em]">
                             {currency}{discountedPrice}
                         </span>
                         {discount && (
-                            <span className="text-sm line-through text-gray-500 font-normal">
+                            <span className="text-xs sm:text-sm line-through text-gray-500 font-normal">
                                 {currency}{price}
                             </span>
                         )}
@@ -162,11 +163,12 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
                     {/* Minimal action button - Apple style */}
                     <Button
                         variant="default"
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full py-3 text-sm font-medium transition-all duration-300 border-0 shadow-sm"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 border-0 shadow-sm"
                         onClick={handleAddToCart}
                     >
-                        <Eye className="mr-2 h-4 w-4" />
-                        View Details
+                        <Eye className="mr-1 sm:mr-2 h-3 sm:h-4 w-3 sm:w-4" />
+                        <span className="hidden sm:inline">View Details</span>
+                        <span className="sm:hidden">View</span>
                     </Button>
                 </CardFooter>
             </Card>
