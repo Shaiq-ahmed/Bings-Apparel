@@ -122,7 +122,7 @@ const FeaturedProductsShowcase = ({ products }) => {
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     className="relative"
                 >
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-10">
                         {products.slice(1, 5).map((product, index) => (
                             <motion.div
                                 key={product._id}
