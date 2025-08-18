@@ -131,7 +131,7 @@ const BestSeller = () => {
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     className="relative"
                 >
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 lg:gap-10">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-8 lg:gap-10">
                         {bestseller.slice(1).map((product, index) => (
                             <motion.div
                                 key={product._id}
