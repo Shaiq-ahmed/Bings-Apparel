@@ -134,6 +134,11 @@ const ShopContextProvider = (props) => {
 
     // Wishlist functions
     const addToWishlist = (productId) => {
+        if (!isLoggedIn) {
+            toast.error("Please log in to add items to your wishlist!");
+            return;
+        }
+
         if (!wishlistItems.includes(productId)) {
             setWishlistItems(prev => [...prev, productId]);
             toast.success("Added to wishlist!");
