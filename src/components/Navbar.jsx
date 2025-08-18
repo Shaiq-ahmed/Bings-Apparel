@@ -13,7 +13,7 @@ import { Search, Menu, ShoppingCart, User, LogOut } from 'lucide-react'
 const Navbar = () => {
     const [isSheetOpen, setIsSheetOpen] = useState(false);
     const [isSearchVisible, setIsSearchVisible] = useState(false)
-    const { setSearchTerm, getCartCount, isLoggedIn, logout } = useContext(ShopContext) // Assume we have isLoggedIn and logout in ShopContext
+    const { setSearchTerm, getCartCount, isLoggedIn, userProfile, logout } = useContext(ShopContext)
     const navigate = useNavigate()
 
     const handleSearch = (e) => {
@@ -52,23 +52,57 @@ const Navbar = () => {
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
                     <Avatar>
-                        <AvatarImage src="/path-to-avatar.jpg" />
-                        <AvatarFallback><User className="h-5 w-5" /></AvatarFallback>
+                        <AvatarImage src={userProfile?.avatar} />
+                        <AvatarFallback>
+                            {userProfile?.name?.charAt(0).toUpperCase() || <User className="h-5 w-5" />}
+                        </AvatarFallback>
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuItem onSelect={() => navigate('/profile')}>
+            <DropdownMenuContent align="end" className="w-80">
+                {userProfile && (
+                    <>
+                        <div className="flex items-center gap-3 p-3 border-b">
+                            <Avatar className="h-12 w-12">
+                                <AvatarImage src={userProfile.avatar} />
+                                <AvatarFallback className="text-lg">
+                                    {userProfile.name.charAt(0).toUpperCase()}
+                                </AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1">
+                                <p className="font-semibold text-sm">{userProfile.name}</p>
+                                <p className="text-xs text-muted-foreground">{userProfile.email}</p>
+                                <p className="text-xs text-blue-600 font-medium">{userProfile.membershipLevel} Member</p>
+                            </div>
+                        </div>
+                        <div className="p-2 text-xs text-muted-foreground border-b">
+                            <div className="flex justify-between">
+                                <span>Total Orders:</span>
+                                <span className="font-medium">{userProfile.totalOrders}</span>
+                            </div>
+                            <div className="flex justify-between mt-1">
+                                <span>Member Since:</span>
+                                <span className="font-medium">{new Date(userProfile.joinDate).toLocaleDateString()}</span>
+                            </div>
+                        </div>
+                    </>
+                )}
+                <DropdownMenuItem onSelect={() => navigate('/profile')} className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
                     My Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => navigate('/orders')}>
+                <DropdownMenuItem onSelect={() => navigate('/orders')} className="flex items-center gap-2">
+                    <ShoppingCart className="h-4 w-4" />
                     Orders
                 </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => navigate('/wishlist')}>
+                <DropdownMenuItem onSelect={() => navigate('/wishlist')} className="flex items-center gap-2">
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
                     Wishlist
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleLogout} className="text-red-600">
-                    <LogOut className="mr-2 h-4 w-4" />
+                <DropdownMenuItem onClick={handleLogout} className="text-red-600 flex items-center gap-2">
+                    <LogOut className="h-4 w-4" />
                     <span>Log out</span>
                 </DropdownMenuItem>
             </DropdownMenuContent>
