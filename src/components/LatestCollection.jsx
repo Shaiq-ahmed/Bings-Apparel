@@ -40,7 +40,7 @@ const LatestCollection = () => {
         <motion.section 
             ref={containerRef}
             style={{ y, opacity }}
-            className="relative py-20 overflow-hidden bg-white"
+            className="relative py-10 overflow-hidden "
         >
             <div className="relative z-10 w-full max-w-8xl mx-auto px-6 sm:px-8 lg:px-12">
                 {/* Apple-style Header */}
@@ -66,7 +66,7 @@ const LatestCollection = () => {
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     className="mb-16"
                 >
-                    <Tabs defaultValue="All" className="w-full max-w-2xl mx-auto">
+                    <Tabs defaultValue="All" className="w-full max-w-5xl mx-auto">
                         <TabsList className="grid w-full grid-cols-4 bg-gray-100 backdrop-blur-sm border-0 rounded-full p-2 h-14">
                             {categories.map((category) => (
                                 <TabsTrigger 
@@ -86,7 +86,7 @@ const LatestCollection = () => {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ duration: 0.6 }}
-                                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 lg:gap-12"
+                                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-8 lg:gap-12"
                                 >
                                     {filteredProducts.map((product, index) => (
                                         <motion.div

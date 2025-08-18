@@ -21,22 +21,15 @@ const Home = ({ searchVisible }) => {
       <Hero/>
       
       {/* Apple-style spacious sections */}
-      <div className='space-y-24 sm:space-y-32 lg:space-y-40'>
+      <div className='space-y-14 sm:space-y-22 lg:space-y-30'>
         {/* Featured Products with Apple-style padding and spacing */}
-        <section className='px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
+        {/* <section className='px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
           <div className='py-16 sm:py-20'>
             <FeaturedProductsCarousel products={productList} />
           </div>
-        </section>
-        
-        {/* Latest Collection - Apple-style full width with inner constraints */}
-        <section className='bg-gray-50'>
-          <div className='py-20 sm:py-24 lg:py-32'>
-            <LatestCollection/>
-          </div>
-        </section>
-        
-        {/* Collection Showcase - Premium brand-style */}
+        </section> */}
+
+                {/* Collection Showcase - Premium brand-style */}
         <section>
           <CollectionShowcase />
         </section>
@@ -47,6 +40,13 @@ const Home = ({ searchVisible }) => {
             <BestSeller/>
           </div>
         </section>
+        
+        {/* Latest Collection - Apple-style full width with inner constraints */}
+        <section className='bg-gray-50'>
+          <div className='py-20 sm:py-24 lg:py-32'>
+            <LatestCollection/>
+          </div>
+        </section>
 
         {/* Feature Showcase - Nike/Adidas inspired */}
         <section className='bg-gray-50'>
@@ -54,28 +54,28 @@ const Home = ({ searchVisible }) => {
         </section>
 
         {/* Stats Section - Premium brand treatment */}
-        <section>
+        {/* <section>
           <StatsSection />
-        </section>
+        </section> */}
 
         
         {/* Our Policy with Apple-style spacing */}
-        <section className='px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
+        {/* <section className='px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
           <div className='py-16 sm:py-20'>
             <OurPolicy/>
           </div>
-        </section>
+        </section> */}
         
         {/* Testimonials Section - Apple-style background treatment */}
         <section className='bg-gray-50'>
-          <div className='py-20 sm:py-24 lg:py-32'>
+          <div className='py-10 sm:py-14 lg:py-16'>
             <TestimonialsSection />
           </div>
         </section>
         
         {/* Newsletter Section with Apple-style generous spacing */}
-        <section className='px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
-          <div className='py-20 sm:py-24 lg:py-32'>
+        <section className='px-1 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
+          <div className='py-10 sm:py-12 lg:py-14'>
             <NewsLetter/>
           </div>
         </section>

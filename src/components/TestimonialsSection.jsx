@@ -10,7 +10,7 @@ const testimonials = [
         role: "Fashion Blogger",
         image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
         rating: 5,
-        text: "Shop of SA has completely transformed my wardrobe! The quality is exceptional and the designs are so unique. I get compliments every time I wear their pieces."
+        text: "Bings Drip has completely transformed my wardrobe! The quality is exceptional and the designs are so unique. I get compliments every time I wear their pieces."
     },
     {
         id: 2,
@@ -26,7 +26,7 @@ const testimonials = [
         role: "Creative Director",
         image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
         rating: 5,
-        text: "I love how Shop of SA combines streetwear with luxury. The pieces are comfortable yet stylish, perfect for both casual and professional settings."
+        text: "I love how Bings Drip SA combines streetwear with luxury. The pieces are comfortable yet stylish, perfect for both casual and professional settings."
     },
     {
         id: 4,
@@ -34,7 +34,7 @@ const testimonials = [
         role: "Fitness Influencer",
         image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
         rating: 5,
-        text: "As someone who's always on the move, I need clothes that can keep up. Shop of SA delivers both style and functionality perfectly."
+        text: "As someone who's always on the move, I need clothes that can keep up. Bings Drip delivers both style and functionality perfectly."
     }
 ];
 
@@ -54,7 +54,7 @@ const TestimonialsSection = () => {
         <motion.section 
             ref={containerRef}
             style={{ y, opacity }}
-            className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50"
+            className="relative py-10 overflow-hidden "
         >
             {/* Background decoration */}
             <div className="absolute inset-0">
@@ -78,7 +78,7 @@ const TestimonialsSection = () => {
                     </h2>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                         Don't just take our word for it. Hear from our community of fashion-forward individuals 
-                        who have experienced the Shop of SA difference.
+                        who have experienced the Bings Drip difference.
                     </p>
                 </motion.div>
 

@@ -223,7 +223,7 @@ const PromotionalPopup = () => {
                                     <Button
                                         onClick={closePopup}
                                         variant="outline"
-                                        className="border-white/30 text-white hover:bg-white/10 px-6 py-3 font-semibold rounded-full transition-all duration-300"
+                                        className="border-white/30 text-black hover:bg-white/10 px-6 py-3 font-semibold rounded-full transition-all duration-300"
                                     >
                                         Maybe Later
                                     </Button>

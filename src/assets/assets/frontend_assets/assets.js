@@ -229,7 +229,7 @@ export const products = [
         description: "Stylish cropped denim jacket with vintage-inspired detailing. Perfect for layering over dresses or casual outfits.",
         price: 115,
         image: [
-            "https://images.unsplash.com/photo-1583880170096-2e35c9e6f47d?w=600&h=800&fit=crop&q=80",
+            // "https://images.unsplash.com/photo-1583880170096-2e35c9e6f47d?w=600&h=800&fit=crop&q=80",
             "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600&h=800&fit=crop&q=80",
             "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&h=800&fit=crop&q=80"
         ],

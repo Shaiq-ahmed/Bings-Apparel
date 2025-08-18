@@ -23,6 +23,7 @@ import {
 import { Pagination } from "@/components/ui/pagination"
 import { ChevronDown, Filter, Search, Grid, List, Sparkles } from 'lucide-react'
 import ProductItem from '../components/ProductItem'
+import { useMediaQuery } from 'react-responsive'; // Add this import
 
 const Collection = () => {
   const { products } = useContext(ShopContext)
@@ -45,8 +46,18 @@ const Collection = () => {
     offset: ["start end", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.8]);
+  const isMobile = useMediaQuery({ maxWidth: 640 }); // Tailwind's sm breakpoint
+
+  const y = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isMobile ? [0, 0] : [0, -30]
+  );
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    isMobile ? [1, 1, 1, 1] : [0, 1, 1, 0.8]
+  );
 
   useEffect(() => {
     let filteredProducts = products
