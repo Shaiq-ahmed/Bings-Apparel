@@ -5,7 +5,6 @@ import BestSeller from '../components/BestSeller'
 import OurPolicy from '../components/OurPolicy'
 import NewsLetter from '../components/NewsLetter'
 import FeaturedProductsCarousel from '@/components/FeaturedProductCarousel'
-import VideoSection from '../components/VideoSection'
 import TestimonialsSection from '../components/TestimonialsSection'
 import FeatureShowcase from '../components/FeatureShowcase'
 import StatsSection from '../components/StatsSection'
@@ -59,10 +58,6 @@ const Home = ({ searchVisible }) => {
           <StatsSection />
         </section>
 
-        {/* Video Section - Apple-style full width treatment */}
-        <section className='bg-black'>
-          <VideoSection />
-        </section>
         
         {/* Our Policy with Apple-style spacing */}
         <section className='px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>

@@ -25,6 +25,7 @@ import ResetPasswordMessage from './pages/ResetPasswordMessage'
 import Profile from './pages/Profile'
 import Wishlist from './pages/Wishlist'
 import { LoadingProvider } from './context/LoadingContext'
+import PromotionalPopup from './components/PromotionalPopup'
 
 function App() {
   const [searchVisible, setSearchVisible] = useState(false);
@@ -59,8 +60,9 @@ function App() {
             <Route path="/orders/:orderId" element={<OrderDetails />} />
           </Routes>
         </main>
-        
+
         <Footer/>
+        <PromotionalPopup />
       </div>
     </LoadingProvider>
   )

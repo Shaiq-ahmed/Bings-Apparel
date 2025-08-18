@@ -11,26 +11,60 @@ const ShopContextProvider = (props) => {
     const delivery_fee = 10;
     const [cartItems, setCartItems] = useState({});
     const [wishlistItems, setWishlistItems] = useState([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(true)
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userProfile, setUserProfile] = useState(null);
 
-    // Other state and functions...
+    // Generate random user data for demo
+    const generateRandomUser = (name, email) => {
+        const avatars = [
+            "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+            "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+            "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+        ];
+
+        return {
+            id: Math.random().toString(36).substr(2, 9),
+            name: name,
+            email: email,
+            avatar: avatars[Math.floor(Math.random() * avatars.length)],
+            joinDate: new Date().toISOString(),
+            totalOrders: Math.floor(Math.random() * 20) + 1,
+            membershipLevel: ['Silver', 'Gold', 'Platinum'][Math.floor(Math.random() * 3)]
+        };
+    };
+
+    const login = (userData) => {
+        const user = generateRandomUser(userData.name, userData.email);
+        setUserProfile(user);
+        setIsLoggedIn(true);
+        localStorage.setItem('userProfile', JSON.stringify(user));
+        localStorage.setItem('isLoggedIn', 'true');
+        toast.success(`Welcome ${user.name}!`);
+    };
 
     const logout = () => {
-        // Implement logout logic here
-        // This might include clearing tokens, resetting state, etc.
-        setIsLoggedIn(false)
-    }
+        setIsLoggedIn(false);
+        setUserProfile(null);
+        localStorage.removeItem('userProfile');
+        localStorage.removeItem('isLoggedIn');
+        toast.success('Logged out successfully!');
+    };
 
     // Check login status on component mount
     useEffect(() => {
-        // Implement logic to check if user is logged in
-        // This might involve checking for a token in localStorage, etc.
         const checkLoginStatus = () => {
-            // Your login check logic here
-            // setIsLoggedIn(true or false based on check)
-        }
-        checkLoginStatus()
-    }, [])
+            const isLoggedInStored = localStorage.getItem('isLoggedIn');
+            const userProfileStored = localStorage.getItem('userProfile');
+
+            if (isLoggedInStored === 'true' && userProfileStored) {
+                setIsLoggedIn(true);
+                setUserProfile(JSON.parse(userProfileStored));
+            }
+        };
+        checkLoginStatus();
+    }, []);
 
     const addToCart = (productData, size, quantity) => {
 
@@ -133,6 +167,8 @@ const ShopContextProvider = (props) => {
         isInWishlist,
         setIsLoggedIn,
         isLoggedIn,
+        userProfile,
+        login,
         logout
     }
     return (

@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Eye, EyeOff } from 'lucide-react'
+import { ShopContext } from '../context/ShopContext'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Email is required"),
@@ -15,6 +16,8 @@ const loginSchema = Yup.object().shape({
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const { login } = useContext(ShopContext)
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -27,8 +30,16 @@ export default function Login() {
       setIsLoading(true)
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000))
-      console.log(values)
+
+      // For demo purposes, using fake name - in real app this would come from API
+      const userData = {
+        name: values.email.split('@')[0].charAt(0).toUpperCase() + values.email.split('@')[0].slice(1),
+        email: values.email
+      };
+
+      login(userData);
       setIsLoading(false)
+      navigate('/')
     },
   })
 
