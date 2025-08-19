@@ -32,7 +32,8 @@ const ShopContextProvider = (props) => {
             avatar: avatars[Math.floor(Math.random() * avatars.length)],
             joinDate: new Date().toISOString(),
             totalOrders: Math.floor(Math.random() * 20) + 1,
-            membershipLevel: ['Silver', 'Gold', 'Platinum'][Math.floor(Math.random() * 3)]
+            membershipLevel: ['Silver', 'Gold', 'Platinum'][Math.floor(Math.random() * 3)],
+            isAdmin: false
         };
     };
 
