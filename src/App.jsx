@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import './animations.css'
 import {BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Collection from './pages/Collection'
