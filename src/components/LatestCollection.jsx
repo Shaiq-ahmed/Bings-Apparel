@@ -79,6 +79,7 @@ const LatestCollection = () => {
     return (
         <motion.section
             ref={containerRef}
+            style={{ y, opacity }}
             className="relative py-10 overflow-hidden"
         >
             <div className="relative z-10 w-full max-w-8xl mx-auto px-6 sm:px-8 lg:px-12">
