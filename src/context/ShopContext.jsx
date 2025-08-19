@@ -38,7 +38,9 @@ const ShopContextProvider = (props) => {
     };
 
     const login = (userData) => {
-        const user = generateRandomUser(userData.name, userData.email);
+        const user = userData.isAdmin ?
+            { ...generateRandomUser(userData.name, userData.email), isAdmin: true } :
+            generateRandomUser(userData.name, userData.email);
         setUserProfile(user);
         setIsLoggedIn(true);
         localStorage.setItem('userProfile', JSON.stringify(user));
