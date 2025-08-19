@@ -107,7 +107,6 @@ const FloatingActionButton = () => {
           {/* Main FAB button */}
           <motion.button
             onClick={isExpanded ? () => setIsExpanded(false) : scrollToTop}
-            onLongPress={() => setIsExpanded(true)}
             className="w-14 h-14 bg-black hover:bg-gray-800 text-white rounded-full shadow-lg flex items-center justify-center relative overflow-hidden"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
