@@ -94,9 +94,7 @@ function App() {
 
   return (
     <LoadingProvider>
-      <BrowserRouter>
-        <AppContent searchVisible={searchVisible} setSearchVisible={setSearchVisible} />
-      </BrowserRouter>
+      <AppContent searchVisible={searchVisible} setSearchVisible={setSearchVisible} />
     </LoadingProvider>
   )
 }
