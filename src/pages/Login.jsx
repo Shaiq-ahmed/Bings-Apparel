@@ -31,15 +31,25 @@ export default function Login() {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
+      // Check for admin credentials
+      const isAdmin = values.email === 'admin@bingsdrip.com' && values.password === 'admin123';
+
       // For demo purposes, using fake name - in real app this would come from API
       const userData = {
-        name: values.email.split('@')[0].charAt(0).toUpperCase() + values.email.split('@')[0].slice(1),
-        email: values.email
+        name: isAdmin ? 'Admin User' : values.email.split('@')[0].charAt(0).toUpperCase() + values.email.split('@')[0].slice(1),
+        email: values.email,
+        isAdmin: isAdmin
       };
 
       login(userData);
       setIsLoading(false)
-      navigate('/')
+
+      // Redirect admin users to admin panel
+      if (isAdmin) {
+        navigate('/admin')
+      } else {
+        navigate('/')
+      }
     },
   })
 
