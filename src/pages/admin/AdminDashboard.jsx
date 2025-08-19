@@ -152,9 +152,6 @@ const AdminDashboard = () => {
     }
   ];
 
-  // Top products
-  const topProducts = products.filter(p => p.bestseller).slice(0, 5);
-
   const getStatusColor = (status) => {
     switch (status) {
       case 'Processing': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
