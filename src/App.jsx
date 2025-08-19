@@ -3,7 +3,7 @@ import './App.css'
 import './animations.css'
 import {BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 
-function AppContent() {
+function AppContent({ searchVisible, setSearchVisible }) {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
 
