@@ -1,5 +1,5 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, animate } from 'framer-motion'
 
 // Magnetic button component
 export const MagneticButton = ({ children, className = "", strength = 0.3, ...props }) => {
