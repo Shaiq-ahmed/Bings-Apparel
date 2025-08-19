@@ -195,6 +195,27 @@ const Cart = () => {
             )}
           </div>
 
+          {/* Coupon Section */}
+          {cartData.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="mb-8"
+            >
+              <Card className="border-0 shadow-sm rounded-2xl bg-gray-50/50">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-medium text-gray-900 mb-4">Coupon Code</h3>
+                  <CouponInput
+                    onCouponApply={handleCouponApply}
+                    appliedCoupon={appliedCoupon}
+                    onCouponRemove={handleCouponRemove}
+                  />
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
+
           {/* Cart summary - Apple style */}
           {cartData.length > 0 && (
             <motion.div 
