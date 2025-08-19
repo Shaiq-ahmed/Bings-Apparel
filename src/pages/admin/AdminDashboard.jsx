@@ -446,23 +446,21 @@ const AdminDashboard = () => {
             <CardContent className="space-y-4">
               {topProducts.map((product, index) => (
                 <motion.div
-                  key={product._id}
+                  key={product.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <img 
-                      src={product.image[0]} 
-                      alt={product.name}
-                      className="w-12 h-12 object-cover rounded-lg"
-                    />
+                    <div className="w-12 h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
+                      <Package className="w-6 h-6 text-gray-600" />
+                    </div>
                     <div>
                       <p className="font-semibold text-gray-900 truncate max-w-[150px]">
                         {product.name}
                       </p>
-                      <p className="text-sm text-gray-600">{product.category}</p>
+                      <p className="text-sm text-gray-600">{product.sales} sales</p>
                       <div className="flex items-center gap-1">
                         <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                         <span className="text-xs text-gray-500">4.8</span>
@@ -470,10 +468,14 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-semibold text-gray-900">${product.price}</p>
-                    <p className="text-xs text-gray-500">
-                      {Math.floor(Math.random() * 100) + 50} sold
-                    </p>
+                    <p className="font-semibold text-gray-900">${product.revenue.toLocaleString()}</p>
+                    <div className="flex items-center justify-end">
+                      {product.trend === 'up' ? (
+                        <ArrowUpRight className="w-4 h-4 text-green-500" />
+                      ) : (
+                        <ArrowDownRight className="w-4 h-4 text-red-500" />
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               ))}
