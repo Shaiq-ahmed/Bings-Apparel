@@ -8,10 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from 'framer-motion';
+import CouponInput from '../components/CouponInput';
 
 const Cart = () => {
   const { cartItems, products, currency, updateCartItems, calculateCartTotals } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -33,6 +35,37 @@ const Cart = () => {
   const removeFromCart = (productId, size) => {
     const currentQuantity = cartItems[productId][size];
     updateCartItems(productId, size, -currentQuantity);
+  };
+
+  const handleCouponApply = (coupon) => {
+    setAppliedCoupon(coupon);
+  };
+
+  const handleCouponRemove = () => {
+    setAppliedCoupon(null);
+  };
+
+  const calculateDiscountedTotal = () => {
+    const { subtotal, shippingFee } = calculateCartTotals();
+    let discount = 0;
+    let finalShipping = shippingFee;
+
+    if (appliedCoupon) {
+      if (appliedCoupon.type === 'percentage') {
+        discount = (subtotal * appliedCoupon.discount) / 100;
+      } else if (appliedCoupon.type === 'fixed') {
+        discount = Math.min(appliedCoupon.discount, subtotal);
+      } else if (appliedCoupon.type === 'shipping') {
+        finalShipping = 0;
+      }
+    }
+
+    return {
+      subtotal,
+      discount,
+      shippingFee: finalShipping,
+      total: subtotal - discount + finalShipping
+    };
   };
 
   return (
@@ -161,6 +194,27 @@ const Cart = () => {
               </div>
             )}
           </div>
+
+          {/* Coupon Section */}
+          {cartData.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="mb-8"
+            >
+              <Card className="border-0 shadow-sm rounded-2xl bg-gray-50/50">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-medium text-gray-900 mb-4">Coupon Code</h3>
+                  <CouponInput
+                    onCouponApply={handleCouponApply}
+                    appliedCoupon={appliedCoupon}
+                    onCouponRemove={handleCouponRemove}
+                  />
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
 
           {/* Cart summary - Apple style */}
           {cartData.length > 0 && (

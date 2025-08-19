@@ -9,10 +9,12 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Search, Menu, ShoppingCart, User, LogOut } from 'lucide-react'
+import SearchAutocomplete from './SearchAutocomplete'
 
 const Navbar = () => {
     const [isSheetOpen, setIsSheetOpen] = useState(false);
-    const [isSearchVisible, setIsSearchVisible] = useState(false)
+    const [isSearchVisible, setIsSearchVisible] = useState(false);
+    const [showSearchModal, setShowSearchModal] = useState(false);
     const { setSearchTerm, getCartCount, isLoggedIn, userProfile, logout } = useContext(ShopContext)
     const navigate = useNavigate()
 
@@ -193,7 +195,7 @@ const Navbar = () => {
 
                     {/* Actions */}
                     <div className="flex items-center space-x-2 md:space-x-4">
-                        <Button variant="ghost" size="icon" onClick={() => setIsSearchVisible(!isSearchVisible)}>
+                        <Button variant="ghost" size="icon" onClick={() => setShowSearchModal(true)}>
                             <Search className="h-5 w-5" />
                         </Button>
 
@@ -216,21 +218,12 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                {/* Search Bar */}
-                {isSearchVisible && (
-                    <form onSubmit={handleSearch} className="mt-4">
-                        <div className="flex">
-                            <Input
-                                type="search"
-                                name="search"
-                                placeholder="Search products..."
-                                className="flex-grow"
-                            />
-                            <Button type="submit" className="ml-2">Search</Button>
-                        </div>
-                    </form>
-                )}
             </div>
+
+            {/* Search Autocomplete Modal */}
+            {showSearchModal && (
+                <SearchAutocomplete onClose={() => setShowSearchModal(false)} />
+            )}
         </nav>
     )
 }

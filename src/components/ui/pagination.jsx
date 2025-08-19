@@ -3,6 +3,11 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from './button'
 
 export function Pagination({ currentPage, totalPages, onPageChange }) {
+  // Ensure we have valid props to prevent crashes
+  if (!totalPages || totalPages <= 0 || !currentPage || currentPage <= 0) {
+    return null;
+  }
+
   const getPageRange = () => {
     const delta = 2; // Number of pages to show before and after the current page
     const range = [];
@@ -30,14 +35,21 @@ export function Pagination({ currentPage, totalPages, onPageChange }) {
     return rangeWithDots;
   };
 
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages && onPageChange) {
+      onPageChange(page);
+    }
+  };
+
   return (
     <nav className="flex justify-center items-center space-x-2" aria-label="Pagination">
       <Button
         variant="outline"
         size="icon"
-        onClick={() => onPageChange(currentPage - 1)}
+        onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
         aria-label="Previous page"
+        className="h-10 w-10"
       >
         <ChevronLeft className="h-4 w-4" />
       </Button>
@@ -45,14 +57,15 @@ export function Pagination({ currentPage, totalPages, onPageChange }) {
       {getPageRange().map((page, index) => (
         <React.Fragment key={index}>
           {page === '...' ? (
-            <span className="px-2">...</span>
+            <span className="px-2 py-2 text-gray-500">...</span>
           ) : (
             <Button
               variant={currentPage === page ? "default" : "outline"}
               size="icon"
-              onClick={() => onPageChange(page)}
+              onClick={() => handlePageChange(page)}
               aria-label={`Page ${page}`}
               aria-current={currentPage === page ? "page" : undefined}
+              className="h-10 w-10"
             >
               {page}
             </Button>
@@ -63,13 +76,13 @@ export function Pagination({ currentPage, totalPages, onPageChange }) {
       <Button
         variant="outline"
         size="icon"
-        onClick={() => onPageChange(currentPage + 1)}
+        onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         aria-label="Next page"
+        className="h-10 w-10"
       >
         <ChevronRight className="h-4 w-4" />
       </Button>
     </nav>
   )
 }
-
