@@ -76,6 +76,12 @@ const AdminLayout = () => {
       badge: null
     },
     {
+      name: 'Notifications',
+      href: '/admin/notifications',
+      icon: Bell,
+      badge: { count: 5, color: 'bg-purple-500' }
+    },
+    {
       name: 'Media',
       href: '/admin/media',
       icon: ImageIcon,
