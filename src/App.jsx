@@ -30,6 +30,7 @@ import CustomerManagement from './pages/admin/CustomerManagement'
 import InventoryManagement from './pages/admin/InventoryManagement'
 import CategoryManagement from './pages/admin/CategoryManagement'
 import PaymentManagement from './pages/admin/PaymentManagement'
+import NotificationManagement from './pages/admin/NotificationManagement'
 import NotFound from './pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
 import { LoadingProvider } from './context/LoadingContext'
@@ -82,6 +83,7 @@ function App({ searchVisible, setSearchVisible }) {
               <Route path="customers" element={<CustomerManagement />} />
               <Route path="inventory" element={<InventoryManagement />} />
               <Route path="payments" element={<PaymentManagement />} />
+              <Route path="notifications" element={<NotificationManagement />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />
