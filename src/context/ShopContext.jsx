@@ -32,12 +32,15 @@ const ShopContextProvider = (props) => {
             avatar: avatars[Math.floor(Math.random() * avatars.length)],
             joinDate: new Date().toISOString(),
             totalOrders: Math.floor(Math.random() * 20) + 1,
-            membershipLevel: ['Silver', 'Gold', 'Platinum'][Math.floor(Math.random() * 3)]
+            membershipLevel: ['Silver', 'Gold', 'Platinum'][Math.floor(Math.random() * 3)],
+            isAdmin: false
         };
     };
 
     const login = (userData) => {
-        const user = generateRandomUser(userData.name, userData.email);
+        const user = userData.isAdmin ?
+            { ...generateRandomUser(userData.name, userData.email), isAdmin: true } :
+            generateRandomUser(userData.name, userData.email);
         setUserProfile(user);
         setIsLoggedIn(true);
         localStorage.setItem('userProfile', JSON.stringify(user));

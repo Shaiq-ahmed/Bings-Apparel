@@ -2,51 +2,21 @@ import { useState } from 'react'
 import './App.css'
 import './animations.css'
 import {BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
-import Home from './pages/Home'
-import Collection from './pages/Collection'
-import Aboutus from './pages/Aboutus'
-import Orders from './pages/Orders'
-import PlaceOrder from './pages/PlaceOrder'
-import Login from './pages/Login'
-import Cart from './pages/Cart'
-import Product from './pages/Product'
-import Contactus from './pages/Contactus'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import {ToastContainer} from "react-toastify"
-import ScrollToTop from './utils/ScrollToTop'
-import 'react-toastify/dist/ReactToastify.css';
-import OrderDetails from './pages/OrderDetails'
-import SignIn from './pages/SignUp'
-import ForgotPassword from './pages/ForgotPassword'
-import EmailVerified from './pages/EmailVerified'
-import ResetPassword from './pages/ResetPassword'
-import SignUp from './pages/SignUp'
-import ResetPasswordMessage from './pages/ResetPasswordMessage'
-import Profile from './pages/Profile'
-import Wishlist from './pages/Wishlist'
-import { LoadingProvider } from './context/LoadingContext'
-import PromotionalPopup from './components/PromotionalPopup'
-import FloatingActionButton from './components/FloatingActionButton'
-import CursorFollower from './components/CursorFollower'
-import PageTransition from './components/PageTransition'
-import AdminDashboard from './pages/AdminDashboard'
 
-function App() {
-  const [searchVisible, setSearchVisible] = useState(false);
+function AppContent({ searchVisible, setSearchVisible }) {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
 
   return (
-    <LoadingProvider>
-      <div className='min-h-screen flex flex-col'>
-        <ToastContainer/>
-        <Navbar searchVisible={searchVisible} setSearchVisible={setSearchVisible} />
-        <ScrollToTop/>
-        
-        {/* Main content area */}
-        <main className='flex-1'>
-          {/* <PageTransition> */}
-            <Routes>
-            <Route path='/admin'element={<AdminDashboard />} />
+    <div className='min-h-screen flex flex-col'>
+      <ToastContainer/>
+      {!isAdminRoute && <Navbar searchVisible={searchVisible} setSearchVisible={setSearchVisible} />}
+      <ScrollToTop/>
+
+      {/* Main content area */}
+      <main className='flex-1'>
+//         <PageTransition>
+          <Routes>
             <Route path="/" element={<Home searchVisible={searchVisible} />} />
             <Route path="/collection" element={<Collection />} />
             <Route path="/about" element={<Aboutus />} />
@@ -60,22 +30,33 @@ function App() {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/reset-password-sent" element={<ResetPasswordMessage />} />
             <Route path="/verify-email" element={<EmailVerified />} />
-            <Route path="/wishlist" element={<Wishlist/>} />  
+            <Route path="/wishlist" element={<Wishlist/>} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/place-order" element={<PlaceOrder />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/orders/:orderId" element={<OrderDetails />} />
-            </Routes>
-          {/* </PageTransition> */}
-        </main>
 
-        <Footer/>
-        <FloatingActionButton />
-        <CursorFollower />
-        <PromotionalPopup />
-      </div>
-    </LoadingProvider>
-  )
+            {/* Admin Routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="products" element={<ProductManagement />} />
+              <Route path="orders" element={<OrderManagement />} />
+              <Route path="customers" element={<CustomerManagement />} />
+              <Route path="inventory" element={<InventoryManagement />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+//         </PageTransition>
+      </main>
+
+      {!isAdminRoute && <Footer/>}
+      {!isAdminRoute && <FloatingActionButton />}
+      {!isAdminRoute && <CursorFollower />}
+      {!isAdminRoute && <PromotionalPopup />}
+    </div>
+  );
 }
+
 
 export default App
