@@ -37,6 +37,37 @@ const Cart = () => {
     updateCartItems(productId, size, -currentQuantity);
   };
 
+  const handleCouponApply = (coupon) => {
+    setAppliedCoupon(coupon);
+  };
+
+  const handleCouponRemove = () => {
+    setAppliedCoupon(null);
+  };
+
+  const calculateDiscountedTotal = () => {
+    const { subtotal, shippingFee } = calculateCartTotals();
+    let discount = 0;
+    let finalShipping = shippingFee;
+
+    if (appliedCoupon) {
+      if (appliedCoupon.type === 'percentage') {
+        discount = (subtotal * appliedCoupon.discount) / 100;
+      } else if (appliedCoupon.type === 'fixed') {
+        discount = Math.min(appliedCoupon.discount, subtotal);
+      } else if (appliedCoupon.type === 'shipping') {
+        finalShipping = 0;
+      }
+    }
+
+    return {
+      subtotal,
+      discount,
+      shippingFee: finalShipping,
+      total: subtotal - discount + finalShipping
+    };
+  };
+
   return (
     <div className='flex flex-col min-h-screen bg-white'>
       <div className='container flex-grow mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl'>
