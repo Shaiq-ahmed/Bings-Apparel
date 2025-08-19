@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback, useMemo } from 'react';
 import { ShopContext } from '../../context/ShopContext';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Button } from '../../components/ui/button';
@@ -53,6 +53,19 @@ const ProductManagement = () => {
   const categories = ['Women', 'Men', 'Kids'];
   const subCategories = ['TopWear', 'BottomWear', 'WinterWear'];
   const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
+  const handleSizeQuantityChange = useCallback((size, quantity, isEditing = false) => {
+    const target = isEditing ? editingProduct : newProduct;
+    const setter = isEditing ? setEditingProduct : setNewProduct;
+
+    setter(prev => ({
+      ...prev,
+      sizeQuantities: {
+        ...prev.sizeQuantities,
+        [size]: parseInt(quantity) || 0
+      }
+    }));
+  }, [editingProduct, newProduct]);
 
   // Filter products
   const filteredProducts = productList.filter(product => {
@@ -109,18 +122,6 @@ const ProductManagement = () => {
     toast.success('Product deleted successfully!');
   };
 
-  const handleSizeQuantityChange = (size, quantity, isEditing = false) => {
-    const target = isEditing ? editingProduct : newProduct;
-    const setter = isEditing ? setEditingProduct : setNewProduct;
-    
-    setter({
-      ...target,
-      sizeQuantities: {
-        ...target.sizeQuantities,
-        [size]: parseInt(quantity) || 0
-      }
-    });
-  };
 
   const getStockStatus = (product) => {
     const totalStock = Object.values(product.sizeQuantities).reduce((sum, qty) => sum + qty, 0);
@@ -144,8 +145,8 @@ const ProductManagement = () => {
               <Label htmlFor="name">Product Name *</Label>
               <Input
                 id="name"
-                value={product.name}
-                onChange={(e) => setProduct({ ...product, name: e.target.value })}
+                value={product.name || ''}
+                onChange={(e) => handleFieldChange('name', e.target.value)}
                 placeholder="Enter product name"
               />
             </div>
@@ -154,8 +155,8 @@ const ProductManagement = () => {
               <Input
                 id="price"
                 type="number"
-                value={product.price}
-                onChange={(e) => setProduct({ ...product, price: e.target.value })}
+                value={product.price || ''}
+                onChange={(e) => handleFieldChange('price', e.target.value)}
                 placeholder="0.00"
               />
             </div>
@@ -165,8 +166,8 @@ const ProductManagement = () => {
             <Label htmlFor="description">Description</Label>
             <Textarea
               id="description"
-              value={product.description}
-              onChange={(e) => setProduct({ ...product, description: e.target.value })}
+              value={product.description || ''}
+              onChange={(e) => handleFieldChange('description', e.target.value)}
               placeholder="Enter product description"
               rows={3}
             />
@@ -175,7 +176,7 @@ const ProductManagement = () => {
           <div className="grid grid-cols-3 gap-4">
             <div>
               <Label>Category *</Label>
-              <Select value={product.category} onValueChange={(value) => setProduct({ ...product, category: value })}>
+              <Select value={product.category || ''} onValueChange={(value) => handleFieldChange('category', value)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select category" />
                 </SelectTrigger>
@@ -188,7 +189,7 @@ const ProductManagement = () => {
             </div>
             <div>
               <Label>Sub Category</Label>
-              <Select value={product.subCategory} onValueChange={(value) => setProduct({ ...product, subCategory: value })}>
+              <Select value={product.subCategory || ''} onValueChange={(value) => handleFieldChange('subCategory', value)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select sub category" />
                 </SelectTrigger>
@@ -204,8 +205,8 @@ const ProductManagement = () => {
               <Input
                 id="discount"
                 type="number"
-                value={product.discount}
-                onChange={(e) => setProduct({ ...product, discount: e.target.value })}
+                value={product.discount || ''}
+                onChange={(e) => handleFieldChange('discount', e.target.value)}
                 placeholder="0"
                 min="0"
                 max="100"
@@ -216,8 +217,8 @@ const ProductManagement = () => {
           <div className="flex items-center space-x-2">
             <Checkbox
               id="bestseller"
-              checked={product.bestseller}
-              onCheckedChange={(checked) => setProduct({ ...product, bestseller: checked })}
+              checked={product.bestseller || false}
+              onCheckedChange={(checked) => handleFieldChange('bestseller', checked)}
             />
             <Label htmlFor="bestseller">Mark as bestseller</Label>
           </div>
@@ -225,17 +226,13 @@ const ProductManagement = () => {
 
         <TabsContent value="images" className="space-y-4">
           <div className="space-y-4">
-            {product.image.map((img, index) => (
-              <div key={index}>
+            {(product.image || ['', '', '']).map((img, index) => (
+              <div key={`image-${index}`}>
                 <Label htmlFor={`image-${index}`}>Image {index + 1} URL</Label>
                 <Input
                   id={`image-${index}`}
-                  value={img}
-                  onChange={(e) => {
-                    const newImages = [...product.image];
-                    newImages[index] = e.target.value;
-                    setProduct({ ...product, image: newImages });
-                  }}
+                  value={img || ''}
+                  onChange={(e) => handleImageChange(index, e.target.value)}
                   placeholder="Enter image URL"
                 />
                 {img && (
@@ -251,29 +248,17 @@ const ProductManagement = () => {
             <Label>Available Sizes & Quantities</Label>
             <div className="grid grid-cols-2 gap-4 mt-2">
               {availableSizes.map(size => (
-                <div key={size} className="flex items-center space-x-2">
+                <div key={`size-${size}`} className="flex items-center space-x-2">
                   <Checkbox
                     id={`size-${size}`}
-                    checked={product.sizes?.includes(size)}
-                    onCheckedChange={(checked) => {
-                      if (checked) {
-                        setProduct({
-                          ...product,
-                          sizes: [...(product.sizes || []), size]
-                        });
-                      } else {
-                        setProduct({
-                          ...product,
-                          sizes: (product.sizes || []).filter(s => s !== size)
-                        });
-                      }
-                    }}
+                    checked={product.sizes?.includes(size) || false}
+                    onCheckedChange={(checked) => handleSizeChange(size, checked)}
                   />
                   <Label htmlFor={`size-${size}`} className="w-8">{size}</Label>
                   <Input
                     type="number"
                     value={product.sizeQuantities?.[size] || ''}
-                    onChange={(e) => handleSizeQuantityChange(size, e.target.value, isEditing)}
+                    onChange={(e) => onSizeQuantityChange(size, e.target.value, isEditing)}
                     placeholder="Qty"
                     min="0"
                     disabled={!product.sizes?.includes(size)}
@@ -320,6 +305,7 @@ const ProductManagement = () => {
               setProduct={setNewProduct}
               onSave={handleAddProduct}
               onCancel={() => setShowAddModal(false)}
+              onSizeQuantityChange={handleSizeQuantityChange}
             />
           </DialogContent>
         </Dialog>
@@ -443,6 +429,7 @@ const ProductManagement = () => {
               setProduct={setEditingProduct}
               onSave={handleUpdateProduct}
               onCancel={() => setEditingProduct(null)}
+              onSizeQuantityChange={handleSizeQuantityChange}
               isEditing={true}
             />
           </DialogContent>
