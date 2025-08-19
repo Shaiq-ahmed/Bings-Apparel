@@ -13,6 +13,7 @@ const ShopContextProvider = (props) => {
     const [wishlistItems, setWishlistItems] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userProfile, setUserProfile] = useState(null);
+    const [appliedCoupon, setAppliedCoupon] = useState(null);
 
     // Generate random user data for demo
     const generateRandomUser = (name, email) => {
@@ -127,9 +128,32 @@ const ShopContextProvider = (props) => {
             }
         }
         const subtotal = total;
-        const shippingFee = 10;
-        const totalAmount = subtotal + shippingFee;
-        return { subtotal, shippingFee, totalAmount };
+        let shippingFee = 10;
+        let discount = 0;
+
+        // Apply coupon discount
+        if (appliedCoupon) {
+            if (appliedCoupon.type === 'percentage') {
+                discount = (subtotal * appliedCoupon.discount) / 100;
+            } else if (appliedCoupon.type === 'fixed') {
+                discount = Math.min(appliedCoupon.discount, subtotal);
+            } else if (appliedCoupon.type === 'shipping') {
+                shippingFee = 0;
+            }
+        }
+
+        const totalAmount = subtotal - discount + shippingFee;
+        return { subtotal, shippingFee, discount, totalAmount, appliedCoupon };
+    };
+
+    const applyCoupon = (coupon) => {
+        setAppliedCoupon(coupon);
+        toast.success(`Coupon ${coupon.code} applied successfully!`);
+    };
+
+    const removeCoupon = () => {
+        setAppliedCoupon(null);
+        toast.success('Coupon removed');
     };
 
     // Wishlist functions
