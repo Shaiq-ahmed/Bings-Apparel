@@ -169,8 +169,7 @@ const LatestCollection = () => {
                                             className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 px-1"
                                             style={{
                                                 scrollbarWidth: 'none',
-                                                msOverflowStyle: 'none',
-                                                WebkitScrollbar: { display: 'none' }
+                                                msOverflowStyle: 'none'
                                             }}
                                         >
                                             {filteredProducts.map((product, index) => (
