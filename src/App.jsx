@@ -28,6 +28,7 @@ import ProductManagement from './pages/admin/ProductManagement'
 import OrderManagement from './pages/admin/OrderManagement'
 import CustomerManagement from './pages/admin/CustomerManagement'
 import InventoryManagement from './pages/admin/InventoryManagement'
+import CategoryManagement from './pages/admin/CategoryManagement'
 import NotFound from './pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
 import { LoadingProvider } from './context/LoadingContext'
@@ -75,6 +76,7 @@ function App({ searchVisible, setSearchVisible }) {
             <Route path="/admin" element={<ProtectedRoute requireAdmin={true}><AdminLayout /></ProtectedRoute>}>
               <Route index element={<AdminDashboard />} />
               <Route path="products" element={<ProductManagement />} />
+              <Route path="categories" element={<CategoryManagement />} />
               <Route path="orders" element={<OrderManagement />} />
               <Route path="customers" element={<CustomerManagement />} />
               <Route path="inventory" element={<InventoryManagement />} />
