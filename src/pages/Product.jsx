@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Heart, ShoppingCart, Star, Minus, Plus } from 'lucide-react'
 import Rating from '../components/Rating'
 import RelatedProducts from '../components/RelatedProducts'
+import RecentlyViewed from '../components/RecentlyViewed'
 import Title from '../components/Text'
 
 const Product = () => {
