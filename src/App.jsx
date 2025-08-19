@@ -30,6 +30,7 @@ import PromotionalPopup from './components/PromotionalPopup'
 import FloatingActionButton from './components/FloatingActionButton'
 import CursorFollower from './components/CursorFollower'
 import PageTransition from './components/PageTransition'
+import AdminDashboard from './pages/AdminDashboard'
 
 function App() {
   const [searchVisible, setSearchVisible] = useState(false);
@@ -43,8 +44,9 @@ function App() {
         
         {/* Main content area */}
         <main className='flex-1'>
-          <PageTransition>
+          {/* <PageTransition> */}
             <Routes>
+            <Route path='/admin'element={<AdminDashboard />} />
             <Route path="/" element={<Home searchVisible={searchVisible} />} />
             <Route path="/collection" element={<Collection />} />
             <Route path="/about" element={<Aboutus />} />
@@ -64,7 +66,7 @@ function App() {
             <Route path="/orders" element={<Orders />} />
             <Route path="/orders/:orderId" element={<OrderDetails />} />
             </Routes>
-          </PageTransition>
+          {/* </PageTransition> */}
         </main>
 
         <Footer/>
