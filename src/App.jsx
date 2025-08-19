@@ -15,7 +15,7 @@ function AppContent({ searchVisible, setSearchVisible }) {
 
       {/* Main content area */}
       <main className='flex-1'>
-        <PageTransition>
+//         <PageTransition>
           <Routes>
             <Route path="/" element={<Home searchVisible={searchVisible} />} />
             <Route path="/collection" element={<Collection />} />
@@ -47,7 +47,7 @@ function AppContent({ searchVisible, setSearchVisible }) {
 
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </PageTransition>
+//         </PageTransition>
       </main>
 
       {!isAdminRoute && <Footer/>}
@@ -57,50 +57,6 @@ function AppContent({ searchVisible, setSearchVisible }) {
     </div>
   );
 }
-import Home from './pages/Home'
-import Collection from './pages/Collection'
-import Aboutus from './pages/Aboutus'
-import Orders from './pages/Orders'
-import PlaceOrder from './pages/PlaceOrder'
-import Login from './pages/Login'
-import Cart from './pages/Cart'
-import Product from './pages/Product'
-import Contactus from './pages/Contactus'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import {ToastContainer} from "react-toastify"
-import ScrollToTop from './utils/ScrollToTop'
-import 'react-toastify/dist/ReactToastify.css';
-import OrderDetails from './pages/OrderDetails'
-import SignIn from './pages/SignUp'
-import ForgotPassword from './pages/ForgotPassword'
-import EmailVerified from './pages/EmailVerified'
-import ResetPassword from './pages/ResetPassword'
-import SignUp from './pages/SignUp'
-import ResetPasswordMessage from './pages/ResetPasswordMessage'
-import Profile from './pages/Profile'
-import Wishlist from './pages/Wishlist'
-import AdminLayout from './components/AdminLayout'
-import AdminDashboard from './pages/admin/AdminDashboard'
-import ProductManagement from './pages/admin/ProductManagement'
-import OrderManagement from './pages/admin/OrderManagement'
-import CustomerManagement from './pages/admin/CustomerManagement'
-import InventoryManagement from './pages/admin/InventoryManagement'
-import NotFound from './pages/NotFound'
-import { LoadingProvider } from './context/LoadingContext'
-import PromotionalPopup from './components/PromotionalPopup'
-import FloatingActionButton from './components/FloatingActionButton'
-import CursorFollower from './components/CursorFollower'
-import PageTransition from './components/PageTransition'
 
-function App() {
-  const [searchVisible, setSearchVisible] = useState(false);
-
-  return (
-    <LoadingProvider>
-      <AppContent searchVisible={searchVisible} setSearchVisible={setSearchVisible} />
-    </LoadingProvider>
-  )
-}
 
 export default App
