@@ -41,6 +41,8 @@ function AppContent({ searchVisible, setSearchVisible }) {
               <Route index element={<AdminDashboard />} />
               <Route path="products" element={<ProductManagement />} />
               <Route path="orders" element={<OrderManagement />} />
+              <Route path="customers" element={<CustomerManagement />} />
+              <Route path="inventory" element={<InventoryManagement />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />
