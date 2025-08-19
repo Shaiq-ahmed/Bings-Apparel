@@ -164,13 +164,9 @@ const LatestCollection = () => {
                                         </motion.button>
 
                                         {/* Horizontal scrolling container */}
-                                        <div 
+                                        <div
                                             ref={scrollContainerRef}
                                             className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 px-1"
-                                            style={{
-                                                scrollbarWidth: 'none',
-                                                msOverflowStyle: 'none'
-                                            }}
                                         >
                                             {filteredProducts.map((product, index) => (
                                                 <motion.div
