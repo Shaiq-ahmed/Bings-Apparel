@@ -65,6 +65,8 @@ function App() {
             <Route path="/place-order" element={<PlaceOrder />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/orders/:orderId" element={<OrderDetails />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="*" element={<NotFound />} />
             </Routes>
           </PageTransition>
         </main>
