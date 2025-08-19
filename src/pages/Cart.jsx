@@ -8,10 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from 'framer-motion';
+import CouponInput from '../components/CouponInput';
 
 const Cart = () => {
   const { cartItems, products, currency, updateCartItems, calculateCartTotals } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
   const navigate = useNavigate();
   
   useEffect(() => {
