@@ -28,109 +28,35 @@ import {
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 
-const ProductManagement = () => {
-  const { products } = useContext(ShopContext);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [editingProduct, setEditingProduct] = useState(null);
-  const [productList, setProductList] = useState(products);
-
-  // New product form state
-  const [newProduct, setNewProduct] = useState({
-    name: '',
-    description: '',
-    price: '',
-    category: '',
-    subCategory: '',
-    sizes: [],
-    sizeQuantities: {},
-    bestseller: false,
-    discount: 0,
-    image: ['', '', '']
-  });
-
+// Extract ProductForm component outside to prevent re-mounting
+const ProductForm = ({ product, setProduct, onSave, onCancel, isEditing = false, onSizeQuantityChange }) => {
+  
   const categories = ['Women', 'Men', 'Kids'];
   const subCategories = ['TopWear', 'BottomWear', 'WinterWear'];
   const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
-  const handleSizeQuantityChange = useCallback((size, quantity, isEditing = false) => {
-    const target = isEditing ? editingProduct : newProduct;
-    const setter = isEditing ? setEditingProduct : setNewProduct;
+  const handleFieldChange = useCallback((field, value) => {
+    setProduct(prev => ({ ...prev, [field]: value }));
+  }, [setProduct]);
 
-    setter(prev => ({
-      ...prev,
-      sizeQuantities: {
-        ...prev.sizeQuantities,
-        [size]: parseInt(quantity) || 0
-      }
-    }));
-  }, [editingProduct, newProduct]);
-
-  // Filter products
-  const filteredProducts = productList.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
-  const handleAddProduct = () => {
-    if (!newProduct.name || !newProduct.price || !newProduct.category) {
-      toast.error('Please fill in all required fields');
-      return;
-    }
-
-    const product = {
-      _id: `NEW_${Date.now()}`,
-      ...newProduct,
-      price: parseFloat(newProduct.price),
-      discount: parseInt(newProduct.discount) || 0
-    };
-
-    setProductList([...productList, product]);
-    setNewProduct({
-      name: '',
-      description: '',
-      price: '',
-      category: '',
-      subCategory: '',
-      sizes: [],
-      sizeQuantities: {},
-      bestseller: false,
-      discount: 0,
-      image: ['', '', '']
+  const handleImageChange = useCallback((index, value) => {
+    setProduct(prev => {
+      const newImages = [...(prev.image || ['', '', ''])];
+      newImages[index] = value;
+      return { ...prev, image: newImages };
     });
-    setShowAddModal(false);
-    toast.success('Product added successfully!');
-  };
+  }, [setProduct]);
 
-  const handleEditProduct = (product) => {
-    setEditingProduct({ ...product });
-  };
+  const handleSizeChange = useCallback((size, checked) => {
+    setProduct(prev => ({
+      ...prev,
+      sizes: checked 
+        ? [...(prev.sizes || []), size]
+        : (prev.sizes || []).filter(s => s !== size)
+    }));
+  }, [setProduct]);
 
-  const handleUpdateProduct = () => {
-    setProductList(productList.map(p => 
-      p._id === editingProduct._id ? editingProduct : p
-    ));
-    setEditingProduct(null);
-    toast.success('Product updated successfully!');
-  };
-
-  const handleDeleteProduct = (productId) => {
-    setProductList(productList.filter(p => p._id !== productId));
-    toast.success('Product deleted successfully!');
-  };
-
-
-  const getStockStatus = (product) => {
-    const totalStock = Object.values(product.sizeQuantities).reduce((sum, qty) => sum + qty, 0);
-    if (totalStock === 0) return { status: 'Out of Stock', color: 'bg-red-100 text-red-800' };
-    if (totalStock < 10) return { status: 'Low Stock', color: 'bg-yellow-100 text-yellow-800' };
-    return { status: 'In Stock', color: 'bg-green-100 text-green-800' };
-  };
-
-  const ProductForm = ({ product, setProduct, onSave, onCancel, isEditing = false }) => (
+  return (
     <div className="space-y-6 max-h-[70vh] overflow-y-auto">
       <Tabs defaultValue="basic" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
@@ -280,6 +206,108 @@ const ProductManagement = () => {
       </div>
     </div>
   );
+};
+
+const ProductManagement = () => {
+  const { products } = useContext(ShopContext);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
+  const [productList, setProductList] = useState(products);
+
+  // New product form state
+  const [newProduct, setNewProduct] = useState({
+    name: '',
+    description: '',
+    price: '',
+    category: '',
+    subCategory: '',
+    sizes: [],
+    sizeQuantities: {},
+    bestseller: false,
+    discount: 0,
+    image: ['', '', '']
+  });
+
+  const categories = ['Women', 'Men', 'Kids'];
+  const subCategories = ['TopWear', 'BottomWear', 'WinterWear'];
+  const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
+  const handleSizeQuantityChange = useCallback((size, quantity, isEditing = false) => {
+    const target = isEditing ? editingProduct : newProduct;
+    const setter = isEditing ? setEditingProduct : setNewProduct;
+    
+    setter(prev => ({
+      ...prev,
+      sizeQuantities: {
+        ...prev.sizeQuantities,
+        [size]: parseInt(quantity) || 0
+      }
+    }));
+  }, [editingProduct, newProduct]);
+
+  // Filter products
+  const filteredProducts = productList.filter(product => {
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         product.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  const handleAddProduct = () => {
+    if (!newProduct.name || !newProduct.price || !newProduct.category) {
+      toast.error('Please fill in all required fields');
+      return;
+    }
+
+    const product = {
+      _id: `NEW_${Date.now()}`,
+      ...newProduct,
+      price: parseFloat(newProduct.price),
+      discount: parseInt(newProduct.discount) || 0
+    };
+
+    setProductList([...productList, product]);
+    setNewProduct({
+      name: '',
+      description: '',
+      price: '',
+      category: '',
+      subCategory: '',
+      sizes: [],
+      sizeQuantities: {},
+      bestseller: false,
+      discount: 0,
+      image: ['', '', '']
+    });
+    setShowAddModal(false);
+    toast.success('Product added successfully!');
+  };
+
+  const handleEditProduct = (product) => {
+    setEditingProduct({ ...product });
+  };
+
+  const handleUpdateProduct = () => {
+    setProductList(productList.map(p => 
+      p._id === editingProduct._id ? editingProduct : p
+    ));
+    setEditingProduct(null);
+    toast.success('Product updated successfully!');
+  };
+
+  const handleDeleteProduct = (productId) => {
+    setProductList(productList.filter(p => p._id !== productId));
+    toast.success('Product deleted successfully!');
+  };
+
+  const getStockStatus = (product) => {
+    const totalStock = Object.values(product.sizeQuantities || {}).reduce((sum, qty) => sum + qty, 0);
+    if (totalStock === 0) return { status: 'Out of Stock', color: 'bg-red-100 text-red-800' };
+    if (totalStock < 10) return { status: 'Low Stock', color: 'bg-yellow-100 text-yellow-800' };
+    return { status: 'In Stock', color: 'bg-green-100 text-green-800' };
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -386,7 +414,7 @@ const ProductManagement = () => {
                     </div>
 
                     <div className="text-xs text-gray-500">
-                      Total Stock: {Object.values(product.sizeQuantities).reduce((sum, qty) => sum + qty, 0)}
+                      Total Stock: {Object.values(product.sizeQuantities || {}).reduce((sum, qty) => sum + qty, 0)}
                     </div>
                   </div>
 
