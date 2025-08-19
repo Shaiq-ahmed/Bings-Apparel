@@ -233,6 +233,11 @@ const Product = () => {
         <Rating />
       </div>
 
+      {/* Recently Viewed */}
+      <div className='w-full mt-12'>
+        <RecentlyViewed currentProductId={productId} />
+      </div>
+
       {/* Related Products */}
       <div className='w-full mt-20 sm:mt-32 mb-5'>
         <div className='-mx-4 sm:-mx-[5vw] md:-mx-[7vw] lg:-mx-[5vw]'>
