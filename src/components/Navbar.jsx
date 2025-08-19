@@ -13,7 +13,8 @@ import SearchAutocomplete from './SearchAutocomplete'
 
 const Navbar = () => {
     const [isSheetOpen, setIsSheetOpen] = useState(false);
-    const [isSearchVisible, setIsSearchVisible] = useState(false)
+    const [isSearchVisible, setIsSearchVisible] = useState(false);
+    const [showSearchModal, setShowSearchModal] = useState(false);
     const { setSearchTerm, getCartCount, isLoggedIn, userProfile, logout } = useContext(ShopContext)
     const navigate = useNavigate()
 
