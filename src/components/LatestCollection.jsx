@@ -5,7 +5,7 @@ import { ShopContext } from '../context/ShopContext'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import ProductItem from './ProductItem'
 import { useNavigate } from 'react-router-dom'
 
@@ -15,6 +15,9 @@ const LatestCollection = () => {
     const [activeCategory, setActiveCategory] = useState('All')
     const navigate = useNavigate()
     const containerRef = useRef(null)
+    const scrollContainerRef = useRef(null)
+    const [canScrollLeft, setCanScrollLeft] = useState(false)
+    const [canScrollRight, setCanScrollRight] = useState(true)
     
     // Subtle parallax effect inspired by Apple
     const { scrollYProgress } = useScroll({
@@ -26,9 +29,46 @@ const LatestCollection = () => {
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.9]);
 
     useEffect(() => {
-        let slice = activeCategory === 'All' ? products.slice(0, 10) : products.slice(0, 20)
+        let slice = activeCategory === 'All' ? products.slice(0, 15) : products.slice(0, 20)
         setLatestCollection(slice)
     }, [products, activeCategory])
+
+    // Handle scroll navigation
+    const scrollLeft = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({
+                left: -400,
+                behavior: 'smooth'
+            })
+        }
+    }
+
+    const scrollRight = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({
+                left: 400,
+                behavior: 'smooth'
+            })
+        }
+    }
+
+    // Check scroll position
+    const handleScroll = () => {
+        if (scrollContainerRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current
+            setCanScrollLeft(scrollLeft > 0)
+            setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
+        }
+    }
+
+    useEffect(() => {
+        const container = scrollContainerRef.current
+        if (container) {
+            container.addEventListener('scroll', handleScroll)
+            handleScroll() // Initial check
+            return () => container.removeEventListener('scroll', handleScroll)
+        }
+    }, [latestCollection])
 
     const categories = ['All', 'Men', 'Women', 'Kids']
 
@@ -37,10 +77,11 @@ const LatestCollection = () => {
         : latestCollection.filter(product => product.category === activeCategory)
 
     return (
-        <motion.section 
+        <motion.section
             ref={containerRef}
-            style={{ y, opacity }}
-            className="relative py-10 overflow-hidden "
+            y={y}
+            opacity={opacity}
+            className="relative py-10 overflow-hidden"
         >
             <div className="relative z-10 w-full max-w-8xl mx-auto px-6 sm:px-8 lg:px-12">
                 {/* Apple-style Header */}
@@ -51,7 +92,7 @@ const LatestCollection = () => {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl md:text-6xl font-semibold text-gray-900 mb-6 tracking-tight">
-                        Latest Collections
+                        Explore the lineup.
                     </h2>
                     <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto font-light leading-relaxed">
                         Discover our curated selection of the season's most coveted pieces, 
@@ -86,35 +127,86 @@ const LatestCollection = () => {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ duration: 0.6 }}
-                                    className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-4 sm:gap-8 lg:gap-12"
+                                    className="relative"
                                 >
-                                    {filteredProducts.map((product, index) => (
-                                        <motion.div
-                                            key={product._id}
-                                            initial={{ opacity: 0, y: 30 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{
-                                                duration: 0.8,
-                                                delay: index * 0.15,
-                                                ease: [0.25, 0.1, 0.25, 1]
-                                            }}
-                                            whileHover={{
-                                                y: -12,
-                                                transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }
-                                            }}
-                                            className="group"
+                                    {/* Apple-style horizontal scroll container */}
+                                    <div className="relative group">
+                                        {/* Left scroll button */}
+                                        <motion.button
+                                            onClick={scrollLeft}
+                                            className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full shadow-lg border border-gray-200/50 flex items-center justify-center transition-all duration-300 ${
+                                                canScrollLeft 
+                                                    ? 'opacity-100 hover:bg-white hover:shadow-xl' 
+                                                    : 'opacity-0 pointer-events-none'
+                                            }`}
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: canScrollLeft ? 1 : 0 }}
                                         >
-                                            <ProductItem 
-                                                id={product._id} 
-                                                image={product.image} 
-                                                name={product.name} 
-                                                price={product.price}
-                                                discount={product.discount}
-                                                sizeQuantities={product.sizeQuantities}
-                                                description={product.description}
-                                            />
-                                        </motion.div>
-                                    ))}
+                                            <ChevronLeft className="w-5 h-5 text-gray-700" />
+                                        </motion.button>
+
+                                        {/* Right scroll button */}
+                                        <motion.button
+                                            onClick={scrollRight}
+                                            className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full shadow-lg border border-gray-200/50 flex items-center justify-center transition-all duration-300 ${
+                                                canScrollRight 
+                                                    ? 'opacity-100 hover:bg-white hover:shadow-xl' 
+                                                    : 'opacity-0 pointer-events-none'
+                                            }`}
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: canScrollRight ? 1 : 0 }}
+                                        >
+                                            <ChevronRight className="w-5 h-5 text-gray-700" />
+                                        </motion.button>
+
+                                        {/* Horizontal scrolling container */}
+                                        <div
+                                            ref={scrollContainerRef}
+                                            className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 px-1"
+                                        >
+                                            {filteredProducts.map((product, index) => (
+                                                <motion.div
+                                                    key={product._id}
+                                                    initial={{ opacity: 0, x: 50 }}
+                                                    animate={{ opacity: 1, x: 0 }}
+                                                    transition={{
+                                                        duration: 0.8,
+                                                        delay: index * 0.1,
+                                                        ease: [0.25, 0.1, 0.25, 1]
+                                                    }}
+                                                    whileHover={{
+                                                        y: -8,
+                                                        transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }
+                                                    }}
+                                                    className="flex-shrink-0 w-80 group"
+                                                >
+                                                    <ProductItem 
+                                                        id={product._id} 
+                                                        image={product.image} 
+                                                        name={product.name} 
+                                                        price={product.price}
+                                                        discount={product.discount}
+                                                        sizeQuantities={product.sizeQuantities}
+                                                        description={product.description}
+                                                    />
+                                                </motion.div>
+                                            ))}
+                                        </div>
+
+                                        {/* Scroll indicators */}
+                                        <div className="flex justify-center mt-6 space-x-2">
+                                            {Array.from({ length: Math.ceil(filteredProducts.length / 4) }).map((_, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
                                 </motion.div>
                             </TabsContent>
                         ))}
@@ -130,13 +222,14 @@ const LatestCollection = () => {
                 >
                     <Button 
                         onClick={() => navigate('/collection')} 
-                        className="bg-black text-white hover:bg-gray-800 px-8 py-4 text-lg font-medium rounded-full shadow-none hover:shadow-lg transition-all duration-300 border-0"
+                        className="bg-blue-600 text-white hover:bg-blue-700 px-8 py-4 text-lg font-medium rounded-full shadow-none hover:shadow-lg transition-all duration-300 border-0"
                     >
-                        View All Collections 
+                        Compare all models 
                         <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                 </motion.div>
             </div>
+
         </motion.section>
     )
 }
