@@ -198,7 +198,10 @@ const ShopContextProvider = (props) => {
         isLoggedIn,
         userProfile,
         login,
-        logout
+        logout,
+        appliedCoupon,
+        applyCoupon,
+        removeCoupon
     }
     return (
         <ShopContext.Provider value={value}>

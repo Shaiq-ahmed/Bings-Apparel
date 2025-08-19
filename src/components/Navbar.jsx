@@ -9,6 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Search, Menu, ShoppingCart, User, LogOut } from 'lucide-react'
+import SearchAutocomplete from './SearchAutocomplete'
 
 const Navbar = () => {
     const [isSheetOpen, setIsSheetOpen] = useState(false);
