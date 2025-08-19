@@ -170,6 +170,7 @@ const LatestCollection = () => {
                                             style={{
                                                 scrollbarWidth: 'none',
                                                 msOverflowStyle: 'none',
+                                                WebkitScrollbar: { display: 'none' }
                                             }}
                                         >
                                             {filteredProducts.map((product, index) => (
