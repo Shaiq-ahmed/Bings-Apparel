@@ -92,7 +92,7 @@ const LatestCollection = () => {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl md:text-6xl font-semibold text-gray-900 mb-6 tracking-tight">
-                        Explore the lineup.
+                        Latest Collection
                     </h2>
                     <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto font-light leading-relaxed">
                         Discover our curated selection of the season's most coveted pieces, 

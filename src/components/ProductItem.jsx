@@ -177,3 +177,5 @@ const ProductItem = ({ id, image, name, price, sizeQuantities, discount, descrip
 }
 
 export default ProductItem
+
+
