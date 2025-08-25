@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback, useMemo } from 'react';
 import { ShopContext } from '../../context/ShopContext';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Button } from '../../components/ui/button';
@@ -28,6 +28,186 @@ import {
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 
+// Extract ProductForm component outside to prevent re-mounting
+const ProductForm = ({ product, setProduct, onSave, onCancel, isEditing = false, onSizeQuantityChange }) => {
+  
+  const categories = ['Women', 'Men', 'Kids'];
+  const subCategories = ['TopWear', 'BottomWear', 'WinterWear'];
+  const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
+  const handleFieldChange = useCallback((field, value) => {
+    setProduct(prev => ({ ...prev, [field]: value }));
+  }, [setProduct]);
+
+  const handleImageChange = useCallback((index, value) => {
+    setProduct(prev => {
+      const newImages = [...(prev.image || ['', '', ''])];
+      newImages[index] = value;
+      return { ...prev, image: newImages };
+    });
+  }, [setProduct]);
+
+  const handleSizeChange = useCallback((size, checked) => {
+    setProduct(prev => ({
+      ...prev,
+      sizes: checked 
+        ? [...(prev.sizes || []), size]
+        : (prev.sizes || []).filter(s => s !== size)
+    }));
+  }, [setProduct]);
+
+  return (
+    <div className="space-y-6 max-h-[70vh] overflow-y-auto">
+      <Tabs defaultValue="basic" className="w-full">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="basic">Basic Info</TabsTrigger>
+          <TabsTrigger value="images">Images</TabsTrigger>
+          <TabsTrigger value="inventory">Inventory</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="basic" className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="name">Product Name *</Label>
+              <Input
+                id="name"
+                value={product.name || ''}
+                onChange={(e) => handleFieldChange('name', e.target.value)}
+                placeholder="Enter product name"
+              />
+            </div>
+            <div>
+              <Label htmlFor="price">Price *</Label>
+              <Input
+                id="price"
+                type="number"
+                value={product.price || ''}
+                onChange={(e) => handleFieldChange('price', e.target.value)}
+                placeholder="0.00"
+              />
+            </div>
+          </div>
+
+          <div>
+            <Label htmlFor="description">Description</Label>
+            <Textarea
+              id="description"
+              value={product.description || ''}
+              onChange={(e) => handleFieldChange('description', e.target.value)}
+              placeholder="Enter product description"
+              rows={3}
+            />
+          </div>
+
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <Label>Category *</Label>
+              <Select value={product.category || ''} onValueChange={(value) => handleFieldChange('category', value)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map(cat => (
+                    <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label>Sub Category</Label>
+              <Select value={product.subCategory || ''} onValueChange={(value) => handleFieldChange('subCategory', value)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select sub category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {subCategories.map(subCat => (
+                    <SelectItem key={subCat} value={subCat}>{subCat}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label htmlFor="discount">Discount (%)</Label>
+              <Input
+                id="discount"
+                type="number"
+                value={product.discount || ''}
+                onChange={(e) => handleFieldChange('discount', e.target.value)}
+                placeholder="0"
+                min="0"
+                max="100"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="bestseller"
+              checked={product.bestseller || false}
+              onCheckedChange={(checked) => handleFieldChange('bestseller', checked)}
+            />
+            <Label htmlFor="bestseller">Mark as bestseller</Label>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="images" className="space-y-4">
+          <div className="space-y-4">
+            {(product.image || ['', '', '']).map((img, index) => (
+              <div key={`image-${index}`}>
+                <Label htmlFor={`image-${index}`}>Image {index + 1} URL</Label>
+                <Input
+                  id={`image-${index}`}
+                  value={img || ''}
+                  onChange={(e) => handleImageChange(index, e.target.value)}
+                  placeholder="Enter image URL"
+                />
+                {img && (
+                  <img src={img} alt={`Preview ${index + 1}`} className="w-24 h-24 object-cover rounded-lg mt-2" />
+                )}
+              </div>
+            ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="inventory" className="space-y-4">
+          <div>
+            <Label>Available Sizes & Quantities</Label>
+            <div className="grid grid-cols-2 gap-4 mt-2">
+              {availableSizes.map(size => (
+                <div key={`size-${size}`} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`size-${size}`}
+                    checked={product.sizes?.includes(size) || false}
+                    onCheckedChange={(checked) => handleSizeChange(size, checked)}
+                  />
+                  <Label htmlFor={`size-${size}`} className="w-8">{size}</Label>
+                  <Input
+                    type="number"
+                    value={product.sizeQuantities?.[size] || ''}
+                    onChange={(e) => onSizeQuantityChange(size, e.target.value, isEditing)}
+                    placeholder="Qty"
+                    min="0"
+                    disabled={!product.sizes?.includes(size)}
+                    className="w-20"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </TabsContent>
+      </Tabs>
+
+      <div className="flex justify-end space-x-2 pt-4 border-t">
+        <Button variant="outline" onClick={onCancel}>Cancel</Button>
+        <Button onClick={onSave}>
+          <Save className="w-4 h-4 mr-2" />
+          {isEditing ? 'Update Product' : 'Add Product'}
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 const ProductManagement = () => {
   const { products } = useContext(ShopContext);
   const [searchTerm, setSearchTerm] = useState('');
@@ -53,6 +233,19 @@ const ProductManagement = () => {
   const categories = ['Women', 'Men', 'Kids'];
   const subCategories = ['TopWear', 'BottomWear', 'WinterWear'];
   const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
+  const handleSizeQuantityChange = useCallback((size, quantity, isEditing = false) => {
+    const target = isEditing ? editingProduct : newProduct;
+    const setter = isEditing ? setEditingProduct : setNewProduct;
+    
+    setter(prev => ({
+      ...prev,
+      sizeQuantities: {
+        ...prev.sizeQuantities,
+        [size]: parseInt(quantity) || 0
+      }
+    }));
+  }, [editingProduct, newProduct]);
 
   // Filter products
   const filteredProducts = productList.filter(product => {
@@ -109,192 +302,12 @@ const ProductManagement = () => {
     toast.success('Product deleted successfully!');
   };
 
-  const handleSizeQuantityChange = (size, quantity, isEditing = false) => {
-    const target = isEditing ? editingProduct : newProduct;
-    const setter = isEditing ? setEditingProduct : setNewProduct;
-    
-    setter({
-      ...target,
-      sizeQuantities: {
-        ...target.sizeQuantities,
-        [size]: parseInt(quantity) || 0
-      }
-    });
-  };
-
   const getStockStatus = (product) => {
-    const totalStock = Object.values(product.sizeQuantities).reduce((sum, qty) => sum + qty, 0);
+    const totalStock = Object.values(product.sizeQuantities || {}).reduce((sum, qty) => sum + qty, 0);
     if (totalStock === 0) return { status: 'Out of Stock', color: 'bg-red-100 text-red-800' };
     if (totalStock < 10) return { status: 'Low Stock', color: 'bg-yellow-100 text-yellow-800' };
     return { status: 'In Stock', color: 'bg-green-100 text-green-800' };
   };
-
-  const ProductForm = ({ product, setProduct, onSave, onCancel, isEditing = false }) => (
-    <div className="space-y-6 max-h-[70vh] overflow-y-auto">
-      <Tabs defaultValue="basic" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="basic">Basic Info</TabsTrigger>
-          <TabsTrigger value="images">Images</TabsTrigger>
-          <TabsTrigger value="inventory">Inventory</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="basic" className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="name">Product Name *</Label>
-              <Input
-                id="name"
-                value={product.name}
-                onChange={(e) => setProduct({ ...product, name: e.target.value })}
-                placeholder="Enter product name"
-              />
-            </div>
-            <div>
-              <Label htmlFor="price">Price *</Label>
-              <Input
-                id="price"
-                type="number"
-                value={product.price}
-                onChange={(e) => setProduct({ ...product, price: e.target.value })}
-                placeholder="0.00"
-              />
-            </div>
-          </div>
-
-          <div>
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              value={product.description}
-              onChange={(e) => setProduct({ ...product, description: e.target.value })}
-              placeholder="Enter product description"
-              rows={3}
-            />
-          </div>
-
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <Label>Category *</Label>
-              <Select value={product.category} onValueChange={(value) => setProduct({ ...product, category: value })}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map(cat => (
-                    <SelectItem key={cat} value={cat}>{cat}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label>Sub Category</Label>
-              <Select value={product.subCategory} onValueChange={(value) => setProduct({ ...product, subCategory: value })}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select sub category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {subCategories.map(subCat => (
-                    <SelectItem key={subCat} value={subCat}>{subCat}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label htmlFor="discount">Discount (%)</Label>
-              <Input
-                id="discount"
-                type="number"
-                value={product.discount}
-                onChange={(e) => setProduct({ ...product, discount: e.target.value })}
-                placeholder="0"
-                min="0"
-                max="100"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="bestseller"
-              checked={product.bestseller}
-              onCheckedChange={(checked) => setProduct({ ...product, bestseller: checked })}
-            />
-            <Label htmlFor="bestseller">Mark as bestseller</Label>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="images" className="space-y-4">
-          <div className="space-y-4">
-            {product.image.map((img, index) => (
-              <div key={index}>
-                <Label htmlFor={`image-${index}`}>Image {index + 1} URL</Label>
-                <Input
-                  id={`image-${index}`}
-                  value={img}
-                  onChange={(e) => {
-                    const newImages = [...product.image];
-                    newImages[index] = e.target.value;
-                    setProduct({ ...product, image: newImages });
-                  }}
-                  placeholder="Enter image URL"
-                />
-                {img && (
-                  <img src={img} alt={`Preview ${index + 1}`} className="w-24 h-24 object-cover rounded-lg mt-2" />
-                )}
-              </div>
-            ))}
-          </div>
-        </TabsContent>
-
-        <TabsContent value="inventory" className="space-y-4">
-          <div>
-            <Label>Available Sizes & Quantities</Label>
-            <div className="grid grid-cols-2 gap-4 mt-2">
-              {availableSizes.map(size => (
-                <div key={size} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`size-${size}`}
-                    checked={product.sizes?.includes(size)}
-                    onCheckedChange={(checked) => {
-                      if (checked) {
-                        setProduct({
-                          ...product,
-                          sizes: [...(product.sizes || []), size]
-                        });
-                      } else {
-                        setProduct({
-                          ...product,
-                          sizes: (product.sizes || []).filter(s => s !== size)
-                        });
-                      }
-                    }}
-                  />
-                  <Label htmlFor={`size-${size}`} className="w-8">{size}</Label>
-                  <Input
-                    type="number"
-                    value={product.sizeQuantities?.[size] || ''}
-                    onChange={(e) => handleSizeQuantityChange(size, e.target.value, isEditing)}
-                    placeholder="Qty"
-                    min="0"
-                    disabled={!product.sizes?.includes(size)}
-                    className="w-20"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </TabsContent>
-      </Tabs>
-
-      <div className="flex justify-end space-x-2 pt-4 border-t">
-        <Button variant="outline" onClick={onCancel}>Cancel</Button>
-        <Button onClick={onSave}>
-          <Save className="w-4 h-4 mr-2" />
-          {isEditing ? 'Update Product' : 'Add Product'}
-        </Button>
-      </div>
-    </div>
-  );
 
   return (
     <div className="p-6 space-y-6">
@@ -320,6 +333,7 @@ const ProductManagement = () => {
               setProduct={setNewProduct}
               onSave={handleAddProduct}
               onCancel={() => setShowAddModal(false)}
+              onSizeQuantityChange={handleSizeQuantityChange}
             />
           </DialogContent>
         </Dialog>
@@ -400,7 +414,7 @@ const ProductManagement = () => {
                     </div>
 
                     <div className="text-xs text-gray-500">
-                      Total Stock: {Object.values(product.sizeQuantities).reduce((sum, qty) => sum + qty, 0)}
+                      Total Stock: {Object.values(product.sizeQuantities || {}).reduce((sum, qty) => sum + qty, 0)}
                     </div>
                   </div>
 
@@ -443,6 +457,7 @@ const ProductManagement = () => {
               setProduct={setEditingProduct}
               onSave={handleUpdateProduct}
               onCancel={() => setEditingProduct(null)}
+              onSizeQuantityChange={handleSizeQuantityChange}
               isEditing={true}
             />
           </DialogContent>

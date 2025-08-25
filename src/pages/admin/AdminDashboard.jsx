@@ -25,7 +25,7 @@ import {
   Package2
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area, ComposedChart } from 'recharts';
 
 const AdminDashboard = () => {
   const { products } = useContext(ShopContext);
@@ -46,6 +46,53 @@ const AdminDashboard = () => {
     todayRevenue: 2847,
     newCustomers: 23
   };
+
+  // Enhanced analytics data
+  const revenueData = [
+    { date: '2024-01-09', revenue: 2400, orders: 24, customers: 12 },
+    { date: '2024-01-10', revenue: 1398, orders: 18, customers: 15 },
+    { date: '2024-01-11', revenue: 9800, orders: 45, customers: 32 },
+    { date: '2024-01-12', revenue: 3908, orders: 32, customers: 21 },
+    { date: '2024-01-13', revenue: 4800, orders: 38, customers: 28 },
+    { date: '2024-01-14', revenue: 3800, orders: 35, customers: 19 },
+    { date: '2024-01-15', revenue: 4300, orders: 42, customers: 34 }
+  ];
+
+  const categoryPerformance = [
+    { name: 'Women', sales: 45, revenue: 18750, growth: 12.5 },
+    { name: 'Men', sales: 38, revenue: 15200, growth: 8.3 },
+    { name: 'Kids', sales: 17, revenue: 6800, growth: -2.1 }
+  ];
+
+  const topProducts = [
+    { id: 1, name: 'Women Casual Dress', sales: 145, revenue: 7250, trend: 'up' },
+    { id: 2, name: 'Men Denim Jacket', sales: 132, revenue: 6600, trend: 'up' },
+    { id: 3, name: 'Kids Summer Top', sales: 98, revenue: 2940, trend: 'down' },
+    { id: 4, name: 'Women Winter Coat', sales: 87, revenue: 8700, trend: 'up' },
+    { id: 5, name: 'Men Running Shoes', sales: 76, revenue: 7600, trend: 'up' }
+  ];
+
+  const customerMetrics = [
+    { metric: 'New Customers', value: 234, change: 15.3, trend: 'up' },
+    { metric: 'Returning Customers', value: 1013, change: 8.7, trend: 'up' },
+    { metric: 'Customer Lifetime Value', value: '$485.20', change: 12.1, trend: 'up' },
+    { metric: 'Churn Rate', value: '2.4%', change: -0.8, trend: 'down' }
+  ];
+
+  const orderStatusData = [
+    { name: 'Completed', value: 68, color: '#10B981' },
+    { name: 'Processing', value: 18, color: '#F59E0B' },
+    { name: 'Shipped', value: 12, color: '#3B82F6' },
+    { name: 'Cancelled', value: 2, color: '#EF4444' }
+  ];
+
+  const trafficSources = [
+    { source: 'Organic Search', visitors: 4520, percentage: 42.3, color: '#10B981' },
+    { source: 'Direct', visitors: 3240, percentage: 30.4, color: '#3B82F6' },
+    { source: 'Social Media', visitors: 1820, percentage: 17.1, color: '#8B5CF6' },
+    { source: 'Email Marketing', visitors: 680, percentage: 6.4, color: '#F59E0B' },
+    { source: 'Paid Ads', visitors: 420, percentage: 3.9, color: '#EF4444' }
+  ];
 
   // Mock sales data
   const salesData = [
@@ -104,9 +151,6 @@ const AdminDashboard = () => {
       items: 1
     }
   ];
-
-  // Top products
-  const topProducts = products.filter(p => p.bestseller).slice(0, 5);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -402,23 +446,21 @@ const AdminDashboard = () => {
             <CardContent className="space-y-4">
               {topProducts.map((product, index) => (
                 <motion.div
-                  key={product._id}
+                  key={product.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <img 
-                      src={product.image[0]} 
-                      alt={product.name}
-                      className="w-12 h-12 object-cover rounded-lg"
-                    />
+                    <div className="w-12 h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
+                      <Package className="w-6 h-6 text-gray-600" />
+                    </div>
                     <div>
                       <p className="font-semibold text-gray-900 truncate max-w-[150px]">
                         {product.name}
                       </p>
-                      <p className="text-sm text-gray-600">{product.category}</p>
+                      <p className="text-sm text-gray-600">{product.sales} sales</p>
                       <div className="flex items-center gap-1">
                         <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                         <span className="text-xs text-gray-500">4.8</span>
@@ -426,10 +468,14 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-semibold text-gray-900">${product.price}</p>
-                    <p className="text-xs text-gray-500">
-                      {Math.floor(Math.random() * 100) + 50} sold
-                    </p>
+                    <p className="font-semibold text-gray-900">${product.revenue.toLocaleString()}</p>
+                    <div className="flex items-center justify-end">
+                      {product.trend === 'up' ? (
+                        <ArrowUpRight className="w-4 h-4 text-green-500" />
+                      ) : (
+                        <ArrowDownRight className="w-4 h-4 text-red-500" />
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               ))}

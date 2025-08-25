@@ -28,7 +28,11 @@ import ProductManagement from './pages/admin/ProductManagement'
 import OrderManagement from './pages/admin/OrderManagement'
 import CustomerManagement from './pages/admin/CustomerManagement'
 import InventoryManagement from './pages/admin/InventoryManagement'
+import CategoryManagement from './pages/admin/CategoryManagement'
+import PaymentManagement from './pages/admin/PaymentManagement'
+import NotificationManagement from './pages/admin/NotificationManagement'
 import NotFound from './pages/NotFound'
+import ProtectedRoute from './components/ProtectedRoute'
 import { LoadingProvider } from './context/LoadingContext'
 import PromotionalPopup from './components/PromotionalPopup'
 import FloatingActionButton from './components/FloatingActionButton'
@@ -71,12 +75,15 @@ function App({ searchVisible, setSearchVisible }) {
             <Route path="/orders/:orderId" element={<OrderDetails />} />
 
             {/* Admin Routes */}
-            <Route path="/admin" element={<AdminLayout />}>
+            <Route path="/admin" element={<ProtectedRoute requireAdmin={true}><AdminLayout /></ProtectedRoute>}>
               <Route index element={<AdminDashboard />} />
               <Route path="products" element={<ProductManagement />} />
+              <Route path="categories" element={<CategoryManagement />} />
               <Route path="orders" element={<OrderManagement />} />
               <Route path="customers" element={<CustomerManagement />} />
               <Route path="inventory" element={<InventoryManagement />} />
+              <Route path="payments" element={<PaymentManagement />} />
+              <Route path="notifications" element={<NotificationManagement />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />
