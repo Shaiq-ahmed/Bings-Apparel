@@ -36,7 +36,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import { LoadingProvider } from './context/LoadingContext'
 import PromotionalPopup from './components/PromotionalPopup'
 import FloatingActionButton from './components/FloatingActionButton'
-import CursorFollower from './components/CursorFollower'
+// import CursorFollower from './components/CursorFollower'
 import PageTransition from './components/PageTransition'
 import {BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
@@ -93,7 +93,7 @@ function App({ searchVisible, setSearchVisible }) {
 
       {!isAdminRoute && <Footer/>}
       {!isAdminRoute && <FloatingActionButton />}
-      {!isAdminRoute && <CursorFollower />}
+      {/* {!isAdminRoute && <CursorFollower />} */}
       {!isAdminRoute && <PromotionalPopup />}
     </div>
   );
